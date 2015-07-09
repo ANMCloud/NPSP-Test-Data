@@ -1,20 +1,15 @@
 <job>
-  <name>Deploy Test Data</name>
+  <name>Delete Test Data</name>
     <description/>
     <extended_description/>
     <job_version/>
     <job_status>0</job_status>
-  <directory>&#x2f;Test Data Deployment</directory>
-  <created_user/>
-  <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.379</created_date>
+  <directory>&#x2f;</directory>
+  <created_user>-</created_user>
+  <created_date>2015&#x2f;06&#x2f;22 12&#x3a;26&#x3a;50.702</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;06&#x2f;19 14&#x3a;38&#x3a;30.516</modified_date>
+  <modified_date>2015&#x2f;06&#x2f;22 12&#x3a;57&#x3a;59.012</modified_date>
     <parameters>
-        <parameter>
-            <name>WORKING_DIR</name>
-            <default_value>&#x2f;usr&#x2f;local&#x2f;kettle&#x2f;npsp_test_data_deploy</default_value>
-            <description/>
-        </parameter>
     </parameters>
     <slaveservers>
     </slaveservers>
@@ -55,8 +50,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>124</xloc>
-      <yloc>52</yloc>
+      <xloc>144</xloc>
+      <yloc>135</yloc>
       </entry>
     <entry>
       <name>Setup Variables</name>
@@ -86,92 +81,21 @@
       <create_parent_folder>N</create_parent_folder>
       <logging_remote_work>N</logging_remote_work>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-            <parameter>            <name>WORKING_DIR</name>
-            <stream_name>&#x24;&#x7b;WORKING_DIR&#x7d;</stream_name>
-            <value/>
-            </parameter>      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>356</xloc>
-      <yloc>52</yloc>
-      </entry>
-    <entry>
-      <name>Insert Household Accounts</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>rep_name</specification_method>
-      <trans_object_id/>
-      <filename/>
-      <transname>Insert Household Accounts</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>146</xloc>
-      <yloc>155</yloc>
-      </entry>
-    <entry>
-      <name>Insert Organizations</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>rep_name</specification_method>
-      <trans_object_id/>
-      <filename/>
-      <transname>Insert Organizations</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>361</xloc>
-      <yloc>155</yloc>
+      <yloc>135</yloc>
       </entry>
     <entry>
-      <name>Insert Contacts</name>
+      <name>Delete deployed data</name>
       <description/>
       <type>TRANS</type>
       <specification_method>rep_name</specification_method>
       <trans_object_id/>
       <filename/>
-      <transname>Insert Contacts</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <transname>Delete deployed data</transname>
+      <directory>&#x2f;</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -194,8 +118,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>141</xloc>
-      <yloc>273</yloc>
+      <xloc>149</xloc>
+      <yloc>276</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -204,8 +128,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>139</xloc>
-      <yloc>423</yloc>
+      <xloc>152</xloc>
+      <yloc>412</yloc>
       </entry>
   </entries>
   <hops>
@@ -220,7 +144,7 @@
     </hop>
     <hop>
       <from>Setup Variables</from>
-      <to>Insert Household Accounts</to>
+      <to>Delete deployed data</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -228,25 +152,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Insert Household Accounts</from>
-      <to>Insert Organizations</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Insert Organizations</from>
-      <to>Insert Contacts</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Insert Contacts</from>
+      <from>Delete deployed data</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

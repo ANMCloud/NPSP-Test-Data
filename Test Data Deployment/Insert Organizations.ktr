@@ -80,10 +80,12 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-  <created_user>-</created_user>
-  <created_date>2015&#x2f;06&#x2f;19 14&#x3a;10&#x3a;15.943</created_date>
+  <created_user/>
+  <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.221</created_date>
   <modified_user>-</modified_user>
   <modified_date>2015&#x2f;06&#x2f;19 14&#x3a;16&#x3a;59.416</modified_date>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
+    <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
@@ -117,92 +119,6 @@
   <hop> <from>Insert Organization Accounts</from><to>Update</to><enabled>Y</enabled> </hop>
   <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Insert Organization Accounts</to><enabled>Y</enabled> </hop>
   </order>
-  <step>
-    <name>Organization Record Type</name>
-    <type>SalesforceInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
-    <username>&#x24;&#x7b;sf_user&#x7d;</username>
-    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>RecordType</module>
-    <condition>SobjectType &#x3d; &#x27;Account&#x27; and DeveloperName &#x3d; &#x27;Organization&#x27;</condition>
-    <specifyQuery>N</specifyQuery>
-    <query/>
-    <include_targeturl>N</include_targeturl>
-    <targeturl_field/>
-    <include_module>N</include_module>
-    <module_field/>
-    <include_rownum>N</include_rownum>
-    <include_deletion_date>N</include_deletion_date>
-    <deletion_date_field/>
-    <rownum_field/>
-    <include_sql>N</include_sql>
-    <sql_field/>
-    <include_Timestamp>N</include_Timestamp>
-    <timestamp_field/>
-    <read_from/>
-    <read_to/>
-    <records_filter>all</records_filter>
-    <useCompression>N</useCompression>
-    <queryAll>N</queryAll>
-    <fields>
-      <field>
-        <name>Record Type ID</name>
-        <field>Id</field>
-        <idlookup>Y</idlookup>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>18</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        </field>
-      </fields>
-    <limit>0</limit>
-    <timeout>60000</timeout>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>195</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>organizations</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>npsp_test_data.db</connection>
-    <sql>SELECT&#xa;  organization_id&#xa;, organization&#xa;FROM organizations&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>119</xloc>
-      <yloc>182</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step>
     <name>Insert Organization Accounts</name>
     <type>SalesforceInsert</type>
@@ -274,6 +190,66 @@
     </step>
 
   <step>
+    <name>Organization Record Type</name>
+    <type>SalesforceInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
+    <username>&#x24;&#x7b;sf_user&#x7d;</username>
+    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>RecordType</module>
+    <condition>SobjectType &#x3d; &#x27;Account&#x27; and DeveloperName &#x3d; &#x27;Organization&#x27;</condition>
+    <specifyQuery>N</specifyQuery>
+    <query/>
+    <include_targeturl>N</include_targeturl>
+    <targeturl_field/>
+    <include_module>N</include_module>
+    <module_field/>
+    <include_rownum>N</include_rownum>
+    <include_deletion_date>N</include_deletion_date>
+    <deletion_date_field/>
+    <rownum_field/>
+    <include_sql>N</include_sql>
+    <sql_field/>
+    <include_Timestamp>N</include_Timestamp>
+    <timestamp_field/>
+    <read_from/>
+    <read_to/>
+    <records_filter>all</records_filter>
+    <useCompression>N</useCompression>
+    <queryAll>N</queryAll>
+    <fields>
+      <field>
+        <name>Record Type ID</name>
+        <field>Id</field>
+        <idlookup>Y</idlookup>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>18</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        </field>
+      </fields>
+    <limit>0</limit>
+    <timeout>60000</timeout>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>195</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Update</name>
     <type>Update</type>
     <description/>
@@ -308,6 +284,32 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>729</xloc>
       <yloc>181</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>organizations</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <sql>SELECT&#xa;  organization_id&#xa;, organization&#xa;FROM organizations&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>119</xloc>
+      <yloc>182</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

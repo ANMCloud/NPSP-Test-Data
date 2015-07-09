@@ -1,26 +1,16 @@
 <transformation>
   <info>
-    <name>Create Recurring Donations</name>
+    <name>Deploy Opportunities</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
-    <directory>&#x2f;Test Data Creation</directory>
+    <directory>&#x2f;</directory>
     <parameters>
         <parameter>
             <name>WORKING_DIR</name>
-            <default_value>&#x2f;usr&#x2f;local&#x2f;kettle&#x2f;npsp_test_data_creation</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>opps_per_recurring_donation</name>
-            <default_value>12</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>recurring_donations_count</name>
-            <default_value>10</default_value>
+            <default_value>&#x24;&#x7b;WORKING_DIR&#x7d;</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -80,21 +70,21 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-  <created_user/>
-  <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;40.787</created_date>
+  <created_user>-</created_user>
+  <created_date>2015&#x2f;06&#x2f;23 11&#x3a;15&#x3a;30.548</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;06&#x2f;19 11&#x3a;56&#x3a;04.404</modified_date>
+  <modified_date>2015&#x2f;07&#x2f;09 11&#x3a;51&#x3a;38.144</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>npsp_test_data.db</name>
+    <name>n</name>
     <server>localhost</server>
     <type>SQLITE</type>
     <access>Native</access>
-    <database>&#x24;&#x7b;WORKING_DIR&#x7d;&#x2f;npsp_test_data.db</database>
+    <database>&#x2f;usr&#x2f;local&#x2f;kettle&#x2f;npsp_test_data_deploy&#x2f;npsp_test_data.db</database>
     <port>-1</port>
     <username/>
     <password>Encrypted </password>
@@ -108,26 +98,25 @@
       <attribute><code>PORT_NUMBER</code><attribute>-1</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
   <order>
-  <hop> <from>All Household Contacts</from><to>Reservoir Sampling</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set name, amount, and close date</from><to>Write opportunities</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write opportunities</from><to>Role &#x3d; primary</to><enabled>Y</enabled> </hop>
-  <hop> <from>Role &#x3d; primary</from><to>Write oppcontactroles</to><enabled>Y</enabled> </hop>
-  <hop> <from>Reservoir Sampling</from><to>Set name, amount, and start date</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set name, amount, and start date</from><to>Write recurring_donations</to><enabled>Y</enabled> </hop>
-  <hop> <from>Generate Rows</from><to>Add sequence</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add sequence</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write recurring_donations</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Set name, amount, and close date</to><enabled>Y</enabled> </hop>
+  <hop> <from>Org Opportunities</from><to>Format dates and pass org fields</to><enabled>N</enabled> </hop>
+  <hop> <from>Format dates and pass org fields</from><to>Insert Organization Opportunities</to><enabled>Y</enabled> </hop>
+  <hop> <from>Org Opportunities</from><to>Format dates and pass org fields</to><enabled>Y</enabled> </hop>
+  <hop> <from>Household Opportunities</from><to>Format dates and pass household fields</to><enabled>Y</enabled> </hop>
+  <hop> <from>Format dates and pass household fields</from><to>Block until Org Opps inserted</to><enabled>Y</enabled> </hop>
+  <hop> <from>Block until Org Opps inserted</from><to>Insert Household Opportunities</to><enabled>Y</enabled> </hop>
+  <hop> <from>Recuring Donations</from><to>Format dates and pass recurring donation fields</to><enabled>Y</enabled> </hop>
+  <hop> <from>Format dates and pass recurring donation fields</from><to>Block until Household Opps inserted</to><enabled>Y</enabled> </hop>
+  <hop> <from>Block until Household Opps inserted</from><to>Insert npe03__Recurring_Donation__c</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Add sequence</name>
-    <type>Sequence</type>
+    <name>Block until Org Opps inserted</name>
+    <type>BlockUntilStepsFinish</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -136,26 +125,191 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <valuename>donation_number</valuename>
-      <use_database>N</use_database>
-      <connection>npsp_test_data.db</connection>
-      <schema/>
-      <seqname>SEQ_</seqname>
-      <use_counter>Y</use_counter>
-      <counter_name/>
-      <start_at>0</start_at>
-      <increment_by>1</increment_by>
-      <max_value>999999999</max_value>
+    <steps>
+      <step>
+        <name>Insert Organization Opportunities</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>268</xloc>
-      <yloc>169</yloc>
+      <xloc>591</xloc>
+      <yloc>188</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>All Household Contacts</name>
+    <name>Format dates and pass household fields</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>close_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>sf_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>stage_name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>Y</select_unspecified>
+      <meta>        <name>close_date</name>
+        <rename>close_date</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <date_format_lenient>true</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type>normal</storage_type>
+      </meta>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>345</xloc>
+      <yloc>190</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Format dates and pass org fields</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>close_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>sf_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>stage_name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>Y</select_unspecified>
+      <meta>        <name>close_date</name>
+        <rename>close_date</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <date_format_lenient>true</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type>normal</storage_type>
+      </meta>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>342</xloc>
+      <yloc>84</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Format dates and pass recurring donation fields</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>sf_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>household_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>contact_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>start_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>Y</select_unspecified>
+      <meta>        <name>start_date</name>
+        <rename>start_date</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd</conversion_mask>
+        <date_format_lenient>true</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type>normal</storage_type>
+      </meta>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>346</xloc>
+      <yloc>307</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Household Opportunities</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -165,24 +319,24 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>npsp_test_data.db</connection>
-    <sql>SELECT&#xa;  h.household_id&#xa;, h.contact_id&#xa;, c.first_name &#x7c;&#x7c; &#x27; &#x27; &#x7c;&#x7c; c.last_name as full_name&#xa;FROM contacts as c, households as h&#xa;WHERE c.id &#x3d; h.contact_id&#xa;</sql>
+    <connection>n</connection>
+    <sql>SELECT &#xa;p.name&#xa;, p.amount&#xa;, p.close_date&#xa;, h.sf_id&#xa;, p.stage_name&#xa;&#xa;FROM opportunities p, households h&#xa;&#xa;WHERE h.household_id is not null&#xa;and p.recurring_donation_id is null &#xa;and h.household_id &#x3d; p.household_id&#xa;&#x3b;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>51</xloc>
-      <yloc>45</yloc>
+      <xloc>94</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Generate Rows</name>
-    <type>RowGenerator</type>
+    <name>Insert Household Opportunities</name>
+    <type>SalesforceInsert</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -191,36 +345,52 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
+    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
+    <username>mrbelvedere&#x40;npsp.ldv01</username>
+    <password>Encrypted 2be98afc825ce96d3fe2ca25affc3f7d6</password>    <module>Opportunity</module>
+    <batchSize>200</batchSize>
+    <salesforceIDFieldName/>
     <fields>
       <field>
-        <name>dummy</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
+        <name>Name</name>
+        <field>name</field>
+        <useExternalId>N</useExternalId>
       </field>
-    </fields>
-    <limit>&#x24;&#x7b;opps_per_recurring_donation&#x7d;</limit>
-    <never_ending>N</never_ending>
-    <interval_in_ms>5000</interval_in_ms>
-    <row_time_field>now</row_time_field>
-    <last_time_field>FiveSecondsAgo</last_time_field>
+      <field>
+        <name>Amount</name>
+        <field>amount</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>CloseDate</name>
+        <field>close_date</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>AccountID</name>
+        <field>sf_id</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>StageName</name>
+        <field>stage_name</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      </fields>
+    <timeout>60000</timeout>
+    <useCompression>N</useCompression>
+    <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>143</xloc>
-      <yloc>169</yloc>
+      <xloc>832</xloc>
+      <yloc>187</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Join Rows &#x28;cartesian product&#x29;</name>
-    <type>JoinRows</type>
+    <name>Insert Organization Opportunities</name>
+    <type>SalesforceInsert</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -229,85 +399,52 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>out</prefix>
-      <cache_size>500</cache_size>
-      <main/>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue/>
- <function>&#x3d;</function>
- <rightvalue/>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>433</xloc>
-      <yloc>169</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Reservoir Sampling</name>
-    <type>ReservoirSampling</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<reservoir_sampling>
-<sample_size>&#x24;&#x7b;recurring_donations_count&#x7d;</sample_size>
-<seed>1</seed>
-</reservoir_sampling>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>226</xloc>
-      <yloc>45</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Role &#x3d; primary</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
+    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
+    <username>mrbelvedere&#x40;npsp.ldv01</username>
+    <password>Encrypted 2be98afc825ce96d3fe2ca25affc3f7d6</password>    <module>Opportunity</module>
+    <batchSize>200</batchSize>
+    <salesforceIDFieldName/>
     <fields>
       <field>
-        <name>role</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Primary</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
+        <name>Name</name>
+        <field>name</field>
+        <useExternalId>N</useExternalId>
       </field>
-    </fields>
+      <field>
+        <name>Amount</name>
+        <field>amount</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>CloseDate</name>
+        <field>close_date</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>AccountID</name>
+        <field>sf_id</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>StageName</name>
+        <field>stage_name</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      </fields>
+    <timeout>60000</timeout>
+    <useCompression>N</useCompression>
+    <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>947</xloc>
-      <yloc>325</yloc>
+      <xloc>589</xloc>
+      <yloc>83</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Set name, amount, and close date</name>
-    <type>ScriptValueMod</type>
+    <name>Insert npe03__Recurring_Donation__c</name>
+    <type>SalesforceInsert</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -316,132 +453,57 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var start_date &#x3d; new Date&#x28;start_date&#x29;&#x3b;&#xa;var close_date &#x3d; start_date.setMonth&#x28;start_date.getMonth&#x28;&#x29; &#x2b; donation_number&#x29;&#x3b;&#xa;&#xa;&#x2f;&#x2f; Set the name&#xa;var name &#x3d; full_name &#x2b; &#x27;&#x3a; &#x24;&#x27; &#x2b; amount&#x3b; &#xa;&#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>close_date</name>
-        <rename>close_date</rename>
-        <type>Date</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>amount</name>
-        <rename>amount</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>name</name>
-        <rename>name</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>617</xloc>
-      <yloc>268</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set name, amount, and start date</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var range_start &#x3d; new Date&#x28;&#x29;&#x3b;&#xa;range_start.setMonth&#x28;range_start.getMonth&#x28;&#x29; - 24&#x29;&#x3b;&#xa;&#xa;var range_end &#x3d; new Date&#x28;&#x29;&#x3b;&#xa;range_end.setMonth&#x28;range_end.getMonth&#x28;&#x29; - 12&#x29;&#x3b; &#xa;&#xa;var start_date &#x3d; new Date&#x28;range_start.getTime&#x28;&#x29; &#x2b; Math.random&#x28;&#x29; &#x2a; &#x28;range_end.getTime&#x28;&#x29; - range_start.getTime&#x28;&#x29;&#x29;&#x29;&#x3b;&#xa;&#xa;&#x2f;&#x2f; Random amount between 1 and 500&#xa;var amount &#x3d; Math.floor&#x28;&#x28;Math.random&#x28;&#x29; &#x2a; 500&#x29; &#x2b; 1&#x29;&#x3b;&#xa;&#xa;&#x2f;&#x2f; Set the name&#xa;var name &#x3d; full_name &#x2b; &#x27;&#x3a; &#x24;&#x27; &#x2b; amount &#x2b; &#x27; Monthly&#x27;&#x3b; &#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>start_date</name>
-        <rename>start_date</rename>
-        <type>Date</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>amount</name>
-        <rename>amount</rename>
-        <type>Number</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>name</name>
-        <rename>name</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>428</xloc>
-      <yloc>45</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write oppcontactroles</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>npsp_test_data.db</connection>
-    <schema/>
-    <table>oppcontactroles</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
+    <username>mrbelvedere&#x40;npsp.ldv01</username>
+    <password>Encrypted 2be98afc825ce96d3fe2ca25affc3f7d6</password>    <module>npe03__Recurring_Donation__c</module>
+    <batchSize>200</batchSize>
+    <salesforceIDFieldName/>
     <fields>
-        <field>
-          <column_name>contact_id</column_name>
-          <stream_name>contact_id</stream_name>
-        </field>
-        <field>
-          <column_name>opportunity_id</column_name>
-          <stream_name>opportunity_id</stream_name>
-        </field>
-        <field>
-          <column_name>role</column_name>
-          <stream_name>role</stream_name>
-        </field>
-    </fields>
+      <field>
+        <name>Name</name>
+        <field>name</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>Id</name>
+        <field>sf_id</field>
+        <useExternalId>Y</useExternalId>
+      </field>
+      <field>
+        <name>npe03__Organization__r</name>
+        <field>household_id</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>npe03__Contact__r</name>
+        <field>contact_id</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>npe03__Date_Established__c</name>
+        <field>start_date</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>npe03__Amount__c</name>
+        <field>amount</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      </fields>
+    <timeout>60000</timeout>
+    <useCompression>N</useCompression>
+    <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>812</xloc>
-      <yloc>400</yloc>
+      <xloc>891</xloc>
+      <yloc>303</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Write opportunities</name>
-    <type>TableOutput</type>
+    <name>Org Opportunities</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -450,56 +512,24 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>npsp_test_data.db</connection>
-    <schema/>
-    <table>opportunities</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>N</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>Y</return_keys>
-    <return_field>opportunity_id</return_field>
-    <fields>
-        <field>
-          <column_name>name</column_name>
-          <stream_name>name</stream_name>
-        </field>
-        <field>
-          <column_name>amount</column_name>
-          <stream_name>amount</stream_name>
-        </field>
-        <field>
-          <column_name>close_date</column_name>
-          <stream_name>close_date</stream_name>
-        </field>
-        <field>
-          <column_name>household_id</column_name>
-          <stream_name>household_id</stream_name>
-        </field>
-        <field>
-          <column_name>recurring_donation_id</column_name>
-          <stream_name>recurring_donation_id</stream_name>
-        </field>
-    </fields>
+    <connection>n</connection>
+    <sql>SELECT &#xa;p.name&#xa;, p.amount&#xa;, p.close_date&#xa;, o.sf_id&#xa;, p.stage_name&#xa;&#xa;FROM opportunities p, organizations o &#xa;&#xa;WHERE o.organization_id is not null &#xa;and o.organization_id &#x3d; p.organization_id&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>809</xloc>
-      <yloc>268</yloc>
+      <xloc>99</xloc>
+      <yloc>83</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Write recurring_donations</name>
-    <type>TableOutput</type>
+    <name>Recuring Donations</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -508,49 +538,42 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>npsp_test_data.db</connection>
-    <schema/>
-    <table>recurring_donations</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>N</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>Y</return_keys>
-    <return_field>recurring_donation_id</return_field>
-    <fields>
-        <field>
-          <column_name>household_id</column_name>
-          <stream_name>household_id</stream_name>
-        </field>
-        <field>
-          <column_name>contact_id</column_name>
-          <stream_name>contact_id</stream_name>
-        </field>
-        <field>
-          <column_name>start_date</column_name>
-          <stream_name>start_date</stream_name>
-        </field>
-        <field>
-          <column_name>amount</column_name>
-          <stream_name>amount</stream_name>
-        </field>
-        <field>
-          <column_name>name</column_name>
-          <stream_name>name</stream_name>
-        </field>
-    </fields>
+    <connection>n</connection>
+    <sql>SELECT &#xa;sf_id&#xa;, household_id&#xa;, contact_id&#xa;, start_date&#xa;, amount&#xa;, name&#xa;&#xa;&#xa;FROM recurring_donations&#xa;&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>636</xloc>
-      <yloc>45</yloc>
+      <xloc>100</xloc>
+      <yloc>310</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Block until Household Opps inserted</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Insert Household Opportunities</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>612</xloc>
+      <yloc>306</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

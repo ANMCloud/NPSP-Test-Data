@@ -1,13 +1,23 @@
 <transformation>
   <info>
-    <name>Delete deployed data</name>
+    <name>Delete Cases</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
-    <directory>&#x2f;</directory>
+    <directory>&#x2f;Test Data Deployment&#x2f;Delete</directory>
     <parameters>
+        <parameter>
+            <name>sf_pass</name>
+            <default_value>Oid75UlJA18l</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>sf_user</name>
+            <default_value>mrbelvedere&#x40;npsp.ldv01</default_value>
+            <description/>
+        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -66,50 +76,15 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2015&#x2f;06&#x2f;22 08&#x3a;58&#x3a;47.188</created_date>
+  <created_date>2015&#x2f;07&#x2f;10 09&#x3a;05&#x3a;39.555</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;07&#x2f;09 11&#x3a;42&#x3a;36.934</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
-    <is_key_private>N</is_key_private>
+  <modified_date>2015&#x2f;07&#x2f;10 10&#x3a;32&#x3a;09.659</modified_date>
   </info>
   <notepads>
   </notepads>
   <order>
-  <hop> <from>Get Contacts by ID</from><to>Wait until Cases are deleted</to><enabled>Y</enabled> </hop>
-  <hop> <from>Wait until Cases are deleted</from><to>Delete Contacts</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Account by ID</from><to>Wait for Contacts to be deleted</to><enabled>Y</enabled> </hop>
-  <hop> <from>Wait for Contacts to be deleted</from><to>Delete Accounts</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Opportunity by ID</from><to>Delete Opportunities</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Cases by ID</from><to>Wait until Opps are deleted</to><enabled>Y</enabled> </hop>
-  <hop> <from>Wait until Opps are deleted</from><to>Delete Cases</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Cases by ID</from><to>Delete Cases</to><enabled>Y</enabled> </hop>
   </order>
-  <step>
-    <name>Delete Accounts</name>
-    <type>SalesforceDelete</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
-    <username>mrbelvedere&#x40;npsp.ldv01</username>
-    <password>Encrypted 2be98afc825ce96d3fe2ca25affc3f7d6</password>    <module>Account</module>
-    <DeleteField>Account ID</DeleteField>
-    <batchSize>200</batchSize>
-    <timeout>60000</timeout>
-    <useCompression>N</useCompression>
-    <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>623</xloc>
-      <yloc>316</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step>
     <name>Delete Cases</name>
     <type>SalesforceDelete</type>
@@ -122,8 +97,8 @@
            <schema_name/>
            </partitioning>
     <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
-    <username>mrbelvedere&#x40;npsp.ldv01</username>
-    <password>Encrypted 2be98afc825ce96d3fe2ca25affc3f7d6</password>    <module>Case</module>
+    <username>&#x24;&#x7b;sf_user&#x7d;</username>
+    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Case</module>
     <DeleteField>Case ID</DeleteField>
     <batchSize>200</batchSize>
     <timeout>60000</timeout>
@@ -131,95 +106,8 @@
     <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>631</xloc>
-      <yloc>119</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Delete Contacts</name>
-    <type>SalesforceDelete</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
-    <username>mrbelvedere&#x40;npsp.ldv01</username>
-    <password>Encrypted 2be98afc825ce96d3fe2ca25affc3f7d6</password>    <module>Contact</module>
-    <DeleteField>Contact ID</DeleteField>
-    <batchSize>200</batchSize>
-    <timeout>60000</timeout>
-    <useCompression>N</useCompression>
-    <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>630</xloc>
-      <yloc>207</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Account by ID</name>
-    <type>SalesforceInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
-    <username>mrbelvedere&#x40;npsp.ldv01</username>
-    <password>Encrypted 2be98afc825ce96d3fe2ca25affc3f7d6</password>    <module>Account</module>
-    <condition/>
-    <specifyQuery>N</specifyQuery>
-    <query/>
-    <include_targeturl>N</include_targeturl>
-    <targeturl_field/>
-    <include_module>N</include_module>
-    <module_field/>
-    <include_rownum>N</include_rownum>
-    <include_deletion_date>N</include_deletion_date>
-    <deletion_date_field/>
-    <rownum_field/>
-    <include_sql>N</include_sql>
-    <sql_field/>
-    <include_Timestamp>N</include_Timestamp>
-    <timestamp_field/>
-    <read_from/>
-    <read_to/>
-    <records_filter>all</records_filter>
-    <useCompression>N</useCompression>
-    <queryAll>N</queryAll>
-    <fields>
-      <field>
-        <name>Account ID</name>
-        <field>Id</field>
-        <idlookup>Y</idlookup>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>18</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        </field>
-      </fields>
-    <limit>0</limit>
-    <timeout>60000</timeout>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>112</xloc>
-      <yloc>323</yloc>
+      <xloc>456</xloc>
+      <yloc>46</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -236,8 +124,8 @@
            <schema_name/>
            </partitioning>
     <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
-    <username>mrbelvedere&#x40;npsp.ldv01</username>
-    <password>Encrypted 2be98afc825ce96d3fe2ca25affc3f7d6</password>    <module>Case</module>
+    <username>&#x24;&#x7b;sf_user&#x7d;</username>
+    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Case</module>
     <condition/>
     <specifyQuery>N</specifyQuery>
     <query/>
@@ -656,230 +544,8 @@
     <timeout>60000</timeout>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>107</xloc>
-      <yloc>122</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Contacts by ID</name>
-    <type>SalesforceInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
-    <username>mrbelvedere&#x40;npsp.ldv01</username>
-    <password>Encrypted 2be98afc825ce96d3fe2ca25affc3f7d6</password>    <module>Contact</module>
-    <condition/>
-    <specifyQuery>N</specifyQuery>
-    <query/>
-    <include_targeturl>N</include_targeturl>
-    <targeturl_field/>
-    <include_module>N</include_module>
-    <module_field/>
-    <include_rownum>N</include_rownum>
-    <include_deletion_date>N</include_deletion_date>
-    <deletion_date_field/>
-    <rownum_field/>
-    <include_sql>N</include_sql>
-    <sql_field/>
-    <include_Timestamp>N</include_Timestamp>
-    <timestamp_field/>
-    <read_from/>
-    <read_to/>
-    <records_filter>all</records_filter>
-    <useCompression>N</useCompression>
-    <queryAll>N</queryAll>
-    <fields>
-      <field>
-        <name>Contact ID</name>
-        <field>Id</field>
-        <idlookup>Y</idlookup>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>18</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        </field>
-      </fields>
-    <limit>0</limit>
-    <timeout>60000</timeout>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>110</xloc>
-      <yloc>211</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Opportunity by ID</name>
-    <type>SalesforceInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
-    <username>mrbelvedere&#x40;npsp.ldv01</username>
-    <password>Encrypted 2be98afc825ce96d3fe2ca25affc3f7d6</password>    <module>Opportunity</module>
-    <condition/>
-    <specifyQuery>N</specifyQuery>
-    <query/>
-    <include_targeturl>N</include_targeturl>
-    <targeturl_field/>
-    <include_module>N</include_module>
-    <module_field/>
-    <include_rownum>N</include_rownum>
-    <include_deletion_date>N</include_deletion_date>
-    <deletion_date_field/>
-    <rownum_field/>
-    <include_sql>N</include_sql>
-    <sql_field/>
-    <include_Timestamp>N</include_Timestamp>
-    <timestamp_field/>
-    <read_from/>
-    <read_to/>
-    <records_filter>all</records_filter>
-    <useCompression>N</useCompression>
-    <queryAll>N</queryAll>
-    <fields>
-      <field>
-        <name>Opportunity ID</name>
-        <field>Id</field>
-        <idlookup>Y</idlookup>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>18</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        </field>
-      </fields>
-    <limit>0</limit>
-    <timeout>60000</timeout>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>114</xloc>
-      <yloc>38</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Wait for Contacts to be deleted</name>
-    <type>BlockUntilStepsFinish</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <steps>
-      <step>
-        <name>Delete Contacts</name>
-        <CopyNr>0</CopyNr>
-        </step>
-      </steps>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>383</xloc>
-      <yloc>319</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Wait until Cases are deleted</name>
-    <type>BlockUntilStepsFinish</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <steps>
-      <step>
-        <name>Delete Cases</name>
-        <CopyNr>0</CopyNr>
-        </step>
-      </steps>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>382</xloc>
-      <yloc>209</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Delete Opportunities</name>
-    <type>SalesforceDelete</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
-    <username>mrbelvedere&#x40;npsp.ldv01</username>
-    <password>Encrypted 2be98afc825ce96d3fe2ca25affc3f7d6</password>    <module>Opportunity</module>
-    <DeleteField>Opportunity ID</DeleteField>
-    <batchSize>200</batchSize>
-    <timeout>60000</timeout>
-    <useCompression>N</useCompression>
-    <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>381</xloc>
-      <yloc>37</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Wait until Opps are deleted</name>
-    <type>BlockUntilStepsFinish</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <steps>
-      <step>
-        <name>Delete Opportunities</name>
-        <CopyNr>0</CopyNr>
-        </step>
-      </steps>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>383</xloc>
-      <yloc>123</yloc>
+      <xloc>111</xloc>
+      <yloc>46</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

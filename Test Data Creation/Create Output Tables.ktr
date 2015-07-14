@@ -73,9 +73,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;40.706</created_date>
   <modified_user>admin</modified_user>
-  <modified_date>2015&#x2f;06&#x2f;24 11&#x3a;59&#x3a;18.458</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
-    <is_key_private>N</is_key_private>
+  <modified_date>2015&#x2f;07&#x2f;14 10&#x3a;21&#x3a;11.803</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -258,7 +256,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE opportunities&#xa;&#x28;&#xa;  name TEXT&#xa;, amount NUMERIC&#xa;, close_date DATETIME&#xa;, organization_id TEXT&#xa;, household_id TEXT&#xa;, contact_id TEXT&#xa;, recurring_donation_id TEXT&#xa;, sf_id TEXT&#xa;, stage_name TEXT DEFAULT &#x27;Closed Won&#x27;&#xa;&#x29;&#xa;&#x3b;</sql>
+    <sql>CREATE TABLE opportunities&#xa;&#x28;&#xa;  id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, name TEXT&#xa;, amount NUMERIC&#xa;, close_date DATETIME&#xa;, organization_id TEXT&#xa;, household_id TEXT&#xa;, contact_id TEXT&#xa;, recurring_donation_id TEXT&#xa;, sf_id TEXT&#xa;, stage_name TEXT DEFAULT &#x27;Closed Won&#x27;&#xa;&#x29;&#xa;&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>

@@ -83,7 +83,7 @@
   <created_user>-</created_user>
   <created_date>2015&#x2f;06&#x2f;23 11&#x3a;15&#x3a;30.548</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;07&#x2f;13 09&#x3a;53&#x3a;12.547</modified_date>
+  <modified_date>2015&#x2f;07&#x2f;14 10&#x3a;31&#x3a;31.226</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -115,6 +115,7 @@
   <hop> <from>Org Opportunities</from><to>Format dates and pass org fields</to><enabled>N</enabled> </hop>
   <hop> <from>Format dates and pass org fields</from><to>Insert Organization Opportunities</to><enabled>Y</enabled> </hop>
   <hop> <from>Org Opportunities</from><to>Format dates and pass org fields</to><enabled>Y</enabled> </hop>
+  <hop> <from>Insert Organization Opportunities</from><to>Update sf_id</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Format dates and pass org fields</name>
@@ -127,7 +128,11 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>name</name>
+    <fields>      <field>        <name>id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>name</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -186,7 +191,7 @@
     <username>&#x24;&#x7b;sf_user&#x7d;</username>
     <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Opportunity</module>
     <batchSize>200</batchSize>
-    <salesforceIDFieldName/>
+    <salesforceIDFieldName>opp_sf_id</salesforceIDFieldName>
     <fields>
       <field>
         <name>Name</name>
@@ -242,7 +247,7 @@
            <schema_name/>
            </partitioning>
     <connection>npsp_test_data.db</connection>
-    <sql>SELECT&#xa;  opp.name&#xa;, opp.amount&#xa;, opp.close_date&#xa;, opp.household_id&#xa;, opp.contact_id&#xa;, opp.stage_name&#xa;, rd.sf_id as rd_sf_id&#xa;, hh.sf_id as hh_sf_id&#xa;FROM opportunities as opp, recurring_donations as rd, households as hh&#xa;WHERE opp.recurring_donation_id is not null&#xa;  AND opp.recurring_donation_id &#x3d; rd.recurring_donation_id&#xa;  AND rd.household_id &#x3d; hh.household_id&#xa;</sql>
+    <sql>SELECT&#xa;  opp.id&#xa;, opp.name&#xa;, opp.amount&#xa;, opp.close_date&#xa;, opp.household_id&#xa;, opp.contact_id&#xa;, opp.stage_name&#xa;, rd.sf_id as rd_sf_id&#xa;, hh.sf_id as hh_sf_id&#xa;FROM opportunities as opp, recurring_donations as rd, households as hh&#xa;WHERE opp.recurring_donation_id is not null&#xa;  AND opp.recurring_donation_id &#x3d; rd.recurring_donation_id&#xa;  AND rd.household_id &#x3d; hh.household_id&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -251,6 +256,45 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>96</xloc>
+      <yloc>84</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Update sf_id</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema/>
+      <table>opportunities</table>
+      <key>
+        <name>id</name>
+        <field>id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+        </key>
+      <value>
+        <name>sf_id</name>
+        <rename>opp_sf_id</rename>
+        </value>
+      </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>782</xloc>
       <yloc>84</yloc>
       <draw>Y</draw>
       </GUI>

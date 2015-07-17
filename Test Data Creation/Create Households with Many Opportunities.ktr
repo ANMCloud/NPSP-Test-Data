@@ -83,9 +83,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;40.446</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;06&#x2f;19 11&#x3a;25&#x3a;37.714</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
-    <is_key_private>N</is_key_private>
+  <modified_date>2015&#x2f;07&#x2f;17 13&#x3a;42&#x3a;03.736</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -117,10 +115,8 @@
   <hop> <from>All Households</from><to>Reservoir Sampling</to><enabled>Y</enabled> </hop>
   <hop> <from>Reservoir Sampling</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Set name, amount, and close date</from><to>Write opportunities</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write opportunities</from><to>Role &#x3d; primary</to><enabled>Y</enabled> </hop>
   <hop> <from>Generate Rows</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Set name, amount, and close date</to><enabled>Y</enabled> </hop>
-  <hop> <from>Role &#x3d; primary</from><to>Write oppcontactroles</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>All Households</name>
@@ -134,7 +130,7 @@
            <schema_name/>
            </partitioning>
     <connection>npsp_test_data.db</connection>
-    <sql>SELECT&#xa;  h.household_id&#xa;, h.contact_id&#xa;, c.first_name &#x7c;&#x7c; &#x27; &#x27; &#x7c;&#x7c; c.last_name as full_name&#xa;FROM contacts as c, households as h&#xa;WHERE c.id &#x3d; h.contact_id&#xa;</sql>
+    <sql>SELECT&#xa;  h.household_id&#xa;, h.contact_id&#xa;, c.first_name &#x7c;&#x7c; &#x27; &#x27; &#x7c;&#x7c; c.last_name as full_name&#xa;, c.id as c_id&#xa;FROM contacts as c, households as h&#xa;WHERE c.id &#x3d; h.contact_id&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -228,47 +224,12 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<reservoir_sampling>
-<sample_size>&#x24;&#x7b;hh_with_many_opps_count&#x7d;</sample_size>
+<reservoir_sampling><sample_size>&#x24;&#x7b;hh_with_many_opps_count&#x7d;</sample_size>
 <seed>1</seed>
-</reservoir_sampling>
-     <cluster_schema/>
+</reservoir_sampling>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>233</xloc>
       <yloc>35</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Role &#x3d; primary</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>role</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Primary</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>996</xloc>
-      <yloc>92</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -311,56 +272,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>666</xloc>
       <yloc>35</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write oppcontactroles</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>npsp_test_data.db</connection>
-    <schema/>
-    <table>oppcontactroles</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-        <field>
-          <column_name>contact_id</column_name>
-          <stream_name>contact_id</stream_name>
-        </field>
-        <field>
-          <column_name>opportunity_id</column_name>
-          <stream_name>opportunity_id</stream_name>
-        </field>
-        <field>
-          <column_name>role</column_name>
-          <stream_name>role</stream_name>
-        </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>861</xloc>
-      <yloc>167</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -409,6 +320,10 @@
         <field>
           <column_name>household_id</column_name>
           <stream_name>household_id</stream_name>
+        </field>
+        <field>
+          <column_name>contact_id</column_name>
+          <stream_name>c_id</stream_name>
         </field>
     </fields>
      <cluster_schema/>

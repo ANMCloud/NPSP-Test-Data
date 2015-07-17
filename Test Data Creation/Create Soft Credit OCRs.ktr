@@ -1,26 +1,31 @@
 <transformation>
   <info>
-    <name>Insert Contacts</name>
+    <name>Create Soft Credit OCRs</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
-    <directory>&#x2f;Test Data Deployment</directory>
+    <directory>&#x2f;Test Data Creation</directory>
     <parameters>
         <parameter>
             <name>WORKING_DIR</name>
-            <default_value>&#x2f;usr&#x2f;local&#x2f;kettle&#x2f;npsp_test_data_deploy</default_value>
+            <default_value>&#x2f;usr&#x2f;local&#x2f;kettle&#x2f;npsp_test_data_creation</default_value>
             <description/>
         </parameter>
         <parameter>
-            <name>sf_pass</name>
-            <default_value>Oid75UlJA18l</default_value>
+            <name>opps_with_soft_credits</name>
+            <default_value>100</default_value>
             <description/>
         </parameter>
         <parameter>
-            <name>sf_user</name>
-            <default_value>mrbelvedere&#x40;npsp.ldv01</default_value>
+            <name>soft_credits_per_opp</name>
+            <default_value>10</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>total_soft_credits</name>
+            <default_value>1000</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -81,9 +86,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user/>
-  <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.124</created_date>
+  <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;40.300</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;07&#x2f;17 13&#x3a;55&#x3a;44.657</modified_date>
+  <modified_date>2015&#x2f;07&#x2f;17 13&#x3a;27&#x3a;41.827</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -112,80 +117,19 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Table input</from><to>Insert Contacts</to><enabled>Y</enabled> </hop>
-  <hop> <from>Insert Contacts</from><to>Update</to><enabled>Y</enabled> </hop>
+  <hop> <from>All Opportunities</from><to>Sample Opportunities</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sample Opportunities</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Generate Rows</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set role and is_primary</from><to>Write oppcontactroles</to><enabled>Y</enabled> </hop>
+  <hop> <from>All Contacts</from><to>Sample Contacts</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sample Contacts</from><to>Add contact sequence</to><enabled>Y</enabled> </hop>
+  <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Add opp sequence</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add opp sequence</from><to>Merge Join</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add contact sequence</from><to>Merge Join</to><enabled>Y</enabled> </hop>
+  <hop> <from>Merge Join</from><to>Set role and is_primary</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Insert Contacts</name>
-    <type>SalesforceInsert</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
-    <username>&#x24;&#x7b;sf_user&#x7d;</username>
-    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Contact</module>
-    <batchSize>200</batchSize>
-    <salesforceIDFieldName>sf_id</salesforceIDFieldName>
-    <fields>
-      <field>
-        <name>Salutation</name>
-        <field>salutation</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>FirstName</name>
-        <field>first_name</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>LastName</name>
-        <field>last_name</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>Email</name>
-        <field>email</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>Phone</name>
-        <field>phone</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>Title</name>
-        <field>job_title</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>npsp__Primary_Affiliation__c</name>
-        <field>organization_sf_id</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>AccountId</name>
-        <field>household_sf_id</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      </fields>
-    <timeout>60000</timeout>
-    <useCompression>N</useCompression>
-    <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>296</xloc>
-      <yloc>71</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Table input</name>
+    <name>All Opportunities</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -196,7 +140,7 @@
            <schema_name/>
            </partitioning>
     <connection>npsp_test_data.db</connection>
-    <sql>SELECT&#xa;  c.id&#xa;, c.salutation&#xa;, c.first_name&#xa;, c.last_name&#xa;, c.email&#xa;, c.phone&#xa;, c.organization&#xa;, c.job_title&#xa;, c.recurring_amount&#xa;, c.donation_amount&#xa;, c.household_id&#xa;, c.organization_id&#xa;, h.sf_id as household_sf_id&#xa;, o.sf_id as organization_sf_id&#xa;FROM contacts as c&#xa;INNER JOIN households as h on h.household_id &#x3d; c.household_id&#xa;LEFT OUTER JOIN organizations as o on o.organization_id &#x3d; c.organization_id &#xa;</sql>
+    <sql>SELECT&#xa;  id as opp_id&#xa;FROM opportunities&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -204,15 +148,150 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>103</xloc>
-      <yloc>71</yloc>
+      <xloc>70</xloc>
+      <yloc>42</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Update</name>
-    <type>Update</type>
+    <name>Generate Rows</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>dummy</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>&#x24;&#x7b;soft_credits_per_opp&#x7d;</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>292</xloc>
+      <yloc>158</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Join Rows &#x28;cartesian product&#x29;</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <cache_size>500</cache_size>
+      <main/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue/>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>399</xloc>
+      <yloc>42</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sample Opportunities</name>
+    <type>ReservoirSampling</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<reservoir_sampling><sample_size>&#x24;&#x7b;opps_with_soft_credits&#x7d;</sample_size>
+<seed>1</seed>
+</reservoir_sampling>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>222</xloc>
+      <yloc>42</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set role and is_primary</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>role</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Influencer</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>is_primary</name>
+        <type>Boolean</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>N</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>729</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write oppcontactroles</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -222,29 +301,177 @@
            <schema_name/>
            </partitioning>
     <connection>npsp_test_data.db</connection>
-    <skip_lookup>N</skip_lookup>
-    <commit>100</commit>
-    <use_batch>N</use_batch>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
-    <lookup>
-      <schema/>
-      <table>contacts</table>
-      <key>
-        <name>id</name>
-        <field>id</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-        </key>
-      <value>
-        <name>sf_id</name>
-        <rename>sf_id</rename>
-        </value>
-      </lookup>
+    <schema/>
+    <table>oppcontactroles</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>contact_id</column_name>
+          <stream_name>c_id</stream_name>
+        </field>
+        <field>
+          <column_name>opportunity_id</column_name>
+          <stream_name>opp_id</stream_name>
+        </field>
+        <field>
+          <column_name>role</column_name>
+          <stream_name>role</stream_name>
+        </field>
+        <field>
+          <column_name>is_primary</column_name>
+          <stream_name>is_primary</stream_name>
+        </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>473</xloc>
-      <yloc>72</yloc>
+      <xloc>910</xloc>
+      <yloc>143</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>All Contacts</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <sql>SELECT&#xa;  id as c_id&#xa;FROM contacts&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>62</xloc>
+      <yloc>349</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sample Contacts</name>
+    <type>ReservoirSampling</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<reservoir_sampling><sample_size>&#x24;&#x7b;total_soft_credits&#x7d;</sample_size>
+<seed>1</seed>
+</reservoir_sampling>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>227</xloc>
+      <yloc>348</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add opp sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>opp_sequence</valuename>
+      <use_database>N</use_database>
+      <connection>npsp_test_data.db</connection>
+      <schema/>
+      <seqname>SEQ_</seqname>
+      <use_counter>Y</use_counter>
+      <counter_name/>
+      <start_at>1</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>441</xloc>
+      <yloc>143</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add contact sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>c_sequence</valuename>
+      <use_database>N</use_database>
+      <connection>npsp_test_data.db</connection>
+      <schema/>
+      <seqname>SEQ_</seqname>
+      <use_counter>Y</use_counter>
+      <counter_name/>
+      <start_at>1</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>442</xloc>
+      <yloc>294</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Merge Join</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>INNER</join_type>
+<step1>Add opp sequence</step1>
+<step2>Add contact sequence</step2>
+    <keys_1>
+      <key>opp_sequence</key>
+    </keys_1>
+    <keys_2>
+      <key>c_sequence</key>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>589</xloc>
+      <yloc>143</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

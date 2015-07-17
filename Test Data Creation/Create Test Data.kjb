@@ -8,7 +8,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.344</created_date>
   <modified_user>admin</modified_user>
-  <modified_date>2015&#x2f;07&#x2f;14 10&#x3a;27&#x3a;04.926</modified_date>
+  <modified_date>2015&#x2f;07&#x2f;17 15&#x3a;40&#x3a;19.781</modified_date>
     <parameters>
         <parameter>
             <name>WORKING_DIR</name>
@@ -222,8 +222,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>104</xloc>
-      <yloc>455</yloc>
+      <xloc>106</xloc>
+      <yloc>588</yloc>
       </entry>
     <entry>
       <name>Create Org Opportunities</name>
@@ -397,6 +397,181 @@
       <xloc>835</xloc>
       <yloc>294</yloc>
       </entry>
+    <entry>
+      <name>Create Soft Credit OCRs</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>rep_name</specification_method>
+      <trans_object_id/>
+      <filename/>
+      <transname>Create Soft Credit OCRs</transname>
+      <directory>&#x2f;Test Data Creation</directory>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>WORKING_DIR</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;WORKING_DIR&#x7d;</value>
+            </parameter>            <parameter>            <name>opps_with_soft_credits</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;opps_with_soft_credits&#x7d;</value>
+            </parameter>            <parameter>            <name>soft_credits_per_opp</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;soft_credits_per_opp&#x7d;</value>
+            </parameter>            <parameter>            <name>total_soft_credits</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;total_soft_credits&#x7d;</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>108</xloc>
+      <yloc>391</yloc>
+      </entry>
+    <entry>
+      <name>Create Extra Addresses</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>rep_name</specification_method>
+      <trans_object_id/>
+      <filename/>
+      <transname>Create Extra Addresses</transname>
+      <directory>&#x2f;Test Data Creation</directory>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>WORKING_DIR</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;WORKING_DIR&#x7d;</value>
+            </parameter>            <parameter>            <name>hh_with_extra_addresses</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;hh_with_extra_addresses&#x7d;</value>
+            </parameter>            <parameter>            <name>extra_addresses_per_hh</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;extra_addresses_per_hh&#x7d;</value>
+            </parameter>            <parameter>            <name>total_extra_addresses</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;total_extra_addresses&#x7d;</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>305</xloc>
+      <yloc>179</yloc>
+      </entry>
+    <entry>
+      <name>Create Seasonal Addresses</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>rep_name</specification_method>
+      <trans_object_id/>
+      <filename/>
+      <transname>Create Seasonal Addresses</transname>
+      <directory>&#x2f;Test Data Creation</directory>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>WORKING_DIR</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;WORKING_DIR&#x7d;</value>
+            </parameter>            <parameter>            <name>hh_with_seasonal_addresses</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;hh_with_seasonal_addresses&#x7d;</value>
+            </parameter>            <parameter>            <name>seasonal_addresses_per_hh</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;seasonal_addresses_per_hh&#x7d;</value>
+            </parameter>            <parameter>            <name>total_seasonal_addresses</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;total_seasonal_addresses&#x7d;</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>493</xloc>
+      <yloc>179</yloc>
+      </entry>
+    <entry>
+      <name>Create Relationships</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>rep_name</specification_method>
+      <trans_object_id/>
+      <filename/>
+      <transname>Create Relationships</transname>
+      <directory>&#x2f;Test Data Creation</directory>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>WORKING_DIR</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;WORKING_DIR&#x7d;</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>107</xloc>
+      <yloc>481</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -436,15 +611,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Load Mock Contacts CSV</from>
-      <to>Create Org Opportunities</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
       <from>Create Org Opportunities</from>
       <to>Create Household Opportunities</to>
       <from_nr>0</from_nr>
@@ -473,12 +639,57 @@
     </hop>
     <hop>
       <from>Create Recurring Donations</from>
+      <to>Create Soft Credit OCRs</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Load Mock Contacts CSV</from>
+      <to>Create Extra Addresses</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create Extra Addresses</from>
+      <to>Create Seasonal Addresses</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create Seasonal Addresses</from>
+      <to>Create Org Opportunities</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create Soft Credit OCRs</from>
+      <to>Create Relationships</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Create Relationships</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>

@@ -83,9 +83,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;40.300</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;06&#x2f;19 11&#x3a;16&#x3a;36.974</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
-    <is_key_private>N</is_key_private>
+  <modified_date>2015&#x2f;07&#x2f;17 13&#x3a;28&#x3a;47.176</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -119,8 +117,6 @@
   <hop> <from>Reservoir Sampling</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Set name, amount, and close date</to><enabled>Y</enabled> </hop>
   <hop> <from>Generate Rows</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write opportunities</from><to>Role &#x3d; primary</to><enabled>Y</enabled> </hop>
-  <hop> <from>Role &#x3d; primary</from><to>Write oppcontactroles</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>All Households</name>
@@ -228,47 +224,12 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<reservoir_sampling>
-<sample_size>&#x24;&#x7b;hh_with_opps_count&#x7d;</sample_size>
+<reservoir_sampling><sample_size>&#x24;&#x7b;hh_with_opps_count&#x7d;</sample_size>
 <seed>1</seed>
-</reservoir_sampling>
-     <cluster_schema/>
+</reservoir_sampling>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>245</xloc>
       <yloc>42</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Role &#x3d; primary</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>role</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Primary</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1008</xloc>
-      <yloc>99</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -311,56 +272,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>678</xloc>
       <yloc>42</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write oppcontactroles</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>npsp_test_data.db</connection>
-    <schema/>
-    <table>oppcontactroles</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-        <field>
-          <column_name>contact_id</column_name>
-          <stream_name>contact_id</stream_name>
-        </field>
-        <field>
-          <column_name>opportunity_id</column_name>
-          <stream_name>opportunity_id</stream_name>
-        </field>
-        <field>
-          <column_name>role</column_name>
-          <stream_name>role</stream_name>
-        </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>873</xloc>
-      <yloc>174</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -409,6 +320,10 @@
         <field>
           <column_name>household_id</column_name>
           <stream_name>household_id</stream_name>
+        </field>
+        <field>
+          <column_name>contact_id</column_name>
+          <stream_name>contact_id</stream_name>
         </field>
     </fields>
      <cluster_schema/>

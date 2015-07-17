@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>Insert Contacts</name>
+    <name>Insert Addresses</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -81,9 +81,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user/>
-  <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.124</created_date>
+  <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.182</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;07&#x2f;17 13&#x3a;55&#x3a;44.657</modified_date>
+  <modified_date>2015&#x2f;07&#x2f;17 15&#x3a;16&#x3a;03.858</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -112,11 +112,11 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Table input</from><to>Insert Contacts</to><enabled>Y</enabled> </hop>
-  <hop> <from>Insert Contacts</from><to>Update</to><enabled>Y</enabled> </hop>
+  <hop> <from>Salesforce Insert</from><to>Update</to><enabled>Y</enabled> </hop>
+  <hop> <from>addresses</from><to>Salesforce Insert</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Insert Contacts</name>
+    <name>Salesforce Insert</name>
     <type>SalesforceInsert</type>
     <description/>
     <distribute>Y</distribute>
@@ -128,48 +128,58 @@
            </partitioning>
     <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
     <username>&#x24;&#x7b;sf_user&#x7d;</username>
-    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Contact</module>
+    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>npsp__Address__c</module>
     <batchSize>200</batchSize>
-    <salesforceIDFieldName>sf_id</salesforceIDFieldName>
+    <salesforceIDFieldName>addr_sf_id</salesforceIDFieldName>
     <fields>
       <field>
-        <name>Salutation</name>
-        <field>salutation</field>
+        <name>npsp__Household_Account__c</name>
+        <field>h_sf_id</field>
         <useExternalId>N</useExternalId>
       </field>
       <field>
-        <name>FirstName</name>
-        <field>first_name</field>
+        <name>npsp__MailingCountry__c</name>
+        <field>country</field>
         <useExternalId>N</useExternalId>
       </field>
       <field>
-        <name>LastName</name>
-        <field>last_name</field>
+        <name>npsp__MailingState__c</name>
+        <field>state</field>
         <useExternalId>N</useExternalId>
       </field>
       <field>
-        <name>Email</name>
-        <field>email</field>
+        <name>npsp__MailingCity__c</name>
+        <field>city</field>
         <useExternalId>N</useExternalId>
       </field>
       <field>
-        <name>Phone</name>
-        <field>phone</field>
+        <name>npsp__Seasonal_Start_Month__c</name>
+        <field>start_month</field>
         <useExternalId>N</useExternalId>
       </field>
       <field>
-        <name>Title</name>
-        <field>job_title</field>
+        <name>npsp__Seasonal_Start_Day__c</name>
+        <field>start_day</field>
         <useExternalId>N</useExternalId>
       </field>
       <field>
-        <name>npsp__Primary_Affiliation__c</name>
-        <field>organization_sf_id</field>
+        <name>npsp__Seasonal_End_Month__c</name>
+        <field>end_month</field>
         <useExternalId>N</useExternalId>
       </field>
       <field>
-        <name>AccountId</name>
-        <field>household_sf_id</field>
+        <name>npsp__Seasonal_End_Day__c</name>
+        <field>end_day</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>npsp__MailingStreet__c</name>
+        <field>street</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>npsp__MailingPostalCode__c</name>
+        <field>zip</field>
         <useExternalId>N</useExternalId>
       </field>
       </fields>
@@ -178,34 +188,8 @@
     <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>296</xloc>
-      <yloc>71</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Table input</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>npsp_test_data.db</connection>
-    <sql>SELECT&#xa;  c.id&#xa;, c.salutation&#xa;, c.first_name&#xa;, c.last_name&#xa;, c.email&#xa;, c.phone&#xa;, c.organization&#xa;, c.job_title&#xa;, c.recurring_amount&#xa;, c.donation_amount&#xa;, c.household_id&#xa;, c.organization_id&#xa;, h.sf_id as household_sf_id&#xa;, o.sf_id as organization_sf_id&#xa;FROM contacts as c&#xa;INNER JOIN households as h on h.household_id &#x3d; c.household_id&#xa;LEFT OUTER JOIN organizations as o on o.organization_id &#x3d; c.organization_id &#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>103</xloc>
-      <yloc>71</yloc>
+      <xloc>240</xloc>
+      <yloc>41</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -229,22 +213,48 @@
     <ignore_flag_field/>
     <lookup>
       <schema/>
-      <table>contacts</table>
+      <table>addresses</table>
       <key>
-        <name>id</name>
-        <field>id</field>
+        <name>address_id</name>
+        <field>address_id</field>
         <condition>&#x3d;</condition>
         <name2/>
         </key>
       <value>
         <name>sf_id</name>
-        <rename>sf_id</rename>
+        <rename>addr_sf_id</rename>
         </value>
       </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>473</xloc>
-      <yloc>72</yloc>
+      <xloc>401</xloc>
+      <yloc>41</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>addresses</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <sql>SELECT&#xa;  h.sf_id as h_sf_id&#xa;, addr.address_id&#xa;, addr.country&#xa;, addr.street&#xa;, addr.state&#xa;, addr.city&#xa;, addr.zip&#xa;, addr.start_month&#xa;, addr.start_day&#xa;, addr.end_month&#xa;, addr.end_day&#xa;FROM addresses as addr, households as h&#xa;WHERE h.household_id &#x3d; addr.household_id&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>77</xloc>
+      <yloc>40</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

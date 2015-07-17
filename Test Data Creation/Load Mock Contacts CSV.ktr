@@ -78,15 +78,13 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.024</created_date>
   <modified_user>admin</modified_user>
-  <modified_date>2015&#x2f;06&#x2f;19 14&#x3a;41&#x3a;29.528</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
-    <is_key_private>N</is_key_private>
+  <modified_date>2015&#x2f;07&#x2f;17 14&#x3a;07&#x3a;44.138</modified_date>
   </info>
   <notepads>
     <notepad>
       <note>Copy address from &#xa;odd rows to even rows</note>
-      <xloc>567</xloc>
-      <yloc>72</yloc>
+      <xloc>728</xloc>
+      <yloc>71</yloc>
       <width>153</width>
       <heigth>42</heigth>
       <fontname>Lucida Grande</fontname>
@@ -203,8 +201,6 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>NPSP Test Contacts.csv</from><to>Odd Rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>NPSP Test Contacts.csv</from><to>Even Rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Odd Rows</from><to>Add constants</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants</from><to>Calculator</to><enabled>Y</enabled> </hop>
   <hop> <from>Even Rows</from><to>Merge odd rows</to><enabled>Y</enabled> </hop>
@@ -245,6 +241,11 @@
   <hop> <from>First N rows</from><to>Merge first row</to><enabled>Y</enabled> </hop>
   <hop> <from>Contacts 2 per household</from><to>Add large_hh_count</to><enabled>Y</enabled> </hop>
   <hop> <from>Add large_hh_count</from><to>First N rows&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>NPSP Test Contacts.csv</from><to>Sort last name</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort last name</from><to>Add sequence</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add sequence</from><to>Overwrite Id with Sequence</to><enabled>Y</enabled> </hop>
+  <hop> <from>Overwrite Id with Sequence</from><to>Odd Rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Overwrite Id with Sequence</from><to>Even Rows</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -273,8 +274,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>388</xloc>
-      <yloc>31</yloc>
+      <xloc>549</xloc>
+      <yloc>30</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -310,6 +311,35 @@
     </step>
 
   <step>
+    <name>Add sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>id</valuename>
+      <use_database>N</use_database>
+      <connection/>
+      <schema/>
+      <seqname>SEQ_</seqname>
+      <use_counter>Y</use_counter>
+      <counter_name/>
+      <start_at>1</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>154</xloc>
+      <yloc>83</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Calculator</name>
     <type>Calculator</type>
     <description/>
@@ -336,8 +366,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>493</xloc>
-      <yloc>32</yloc>
+      <xloc>654</xloc>
+      <yloc>31</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -393,8 +423,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>296</xloc>
-      <yloc>133</yloc>
+      <xloc>436</xloc>
+      <yloc>140</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -584,8 +614,8 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>495</xloc>
-      <yloc>133</yloc>
+      <xloc>656</xloc>
+      <yloc>132</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -645,7 +675,7 @@
     <fields>
       <field>
         <name>id</name>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <currency/>
         <decimal/>
@@ -811,8 +841,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>90</xloc>
-      <yloc>81</yloc>
+      <xloc>68</xloc>
+      <yloc>14</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -830,8 +860,88 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>293</xloc>
-      <yloc>35</yloc>
+      <xloc>454</xloc>
+      <yloc>34</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Overwrite Id with Sequence</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>id_1</name>
+        <rename>id</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>salutation</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>first_name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>last_name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>email</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>country</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>street</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>state</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>city</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>zip</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>phone</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>organization</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>job_title</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>recurring_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>donation_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>258</xloc>
+      <yloc>99</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -904,6 +1014,10 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>donation_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>large_hh_count</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -1262,31 +1376,31 @@
       <field>
         <name>country</name>
         <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
+        <case_sensitive>Y</case_sensitive>
         <presorted>N</presorted>
       </field>
       <field>
         <name>street</name>
         <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
+        <case_sensitive>Y</case_sensitive>
         <presorted>N</presorted>
       </field>
       <field>
         <name>state</name>
         <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
+        <case_sensitive>Y</case_sensitive>
         <presorted>N</presorted>
       </field>
       <field>
         <name>city</name>
         <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
+        <case_sensitive>Y</case_sensitive>
         <presorted>N</presorted>
       </field>
       <field>
         <name>zip</name>
         <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
+        <case_sensitive>Y</case_sensitive>
         <presorted>N</presorted>
       </field>
     </fields>
@@ -1326,8 +1440,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>227</xloc>
-      <yloc>213</yloc>
+      <xloc>289</xloc>
+      <yloc>212</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1388,7 +1502,7 @@
       <field>
         <name>organization</name>
         <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
+        <case_sensitive>Y</case_sensitive>
         <presorted>N</presorted>
       </field>
     </fields>
@@ -1512,6 +1626,40 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>428</xloc>
       <yloc>627</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort last name</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>last_name</name>
+        <ascending>Y</ascending>
+        <case_sensitive>Y</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>40</xloc>
+      <yloc>97</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1645,7 +1793,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>606</xloc>
-      <yloc>554</yloc>
+      <yloc>552</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

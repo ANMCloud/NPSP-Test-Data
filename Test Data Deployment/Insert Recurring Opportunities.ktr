@@ -83,7 +83,7 @@
   <created_user>-</created_user>
   <created_date>2015&#x2f;06&#x2f;23 11&#x3a;15&#x3a;30.548</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;07&#x2f;14 10&#x3a;31&#x3a;31.226</modified_date>
+  <modified_date>2015&#x2f;07&#x2f;17 12&#x3a;37&#x3a;58.852</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -112,10 +112,10 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Org Opportunities</from><to>Format dates and pass org fields</to><enabled>N</enabled> </hop>
-  <hop> <from>Format dates and pass org fields</from><to>Insert Organization Opportunities</to><enabled>Y</enabled> </hop>
-  <hop> <from>Org Opportunities</from><to>Format dates and pass org fields</to><enabled>Y</enabled> </hop>
-  <hop> <from>Insert Organization Opportunities</from><to>Update sf_id</to><enabled>Y</enabled> </hop>
+  <hop> <from>Recurring Opportunities</from><to>Format dates and pass org fields</to><enabled>N</enabled> </hop>
+  <hop> <from>Format dates and pass org fields</from><to>Insert Opportunities</to><enabled>Y</enabled> </hop>
+  <hop> <from>Recurring Opportunities</from><to>Format dates and pass org fields</to><enabled>Y</enabled> </hop>
+  <hop> <from>Insert Opportunities</from><to>Update sf_id</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Format dates and pass org fields</name>
@@ -152,6 +152,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>c_sf_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>Y</select_unspecified>
       <meta>        <name>close_date</name>
         <rename>close_date</rename>
@@ -177,7 +181,7 @@
     </step>
 
   <step>
-    <name>Insert Organization Opportunities</name>
+    <name>Insert Opportunities</name>
     <type>SalesforceInsert</type>
     <description/>
     <distribute>Y</distribute>
@@ -223,6 +227,11 @@
         <field>rd_sf_id</field>
         <useExternalId>N</useExternalId>
       </field>
+      <field>
+        <name>npsp__Primary_Contact__c</name>
+        <field>c_sf_id</field>
+        <useExternalId>N</useExternalId>
+      </field>
       </fields>
     <timeout>60000</timeout>
     <useCompression>N</useCompression>
@@ -236,7 +245,7 @@
     </step>
 
   <step>
-    <name>Org Opportunities</name>
+    <name>Recurring Opportunities</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -247,7 +256,7 @@
            <schema_name/>
            </partitioning>
     <connection>npsp_test_data.db</connection>
-    <sql>SELECT&#xa;  opp.id&#xa;, opp.name&#xa;, opp.amount&#xa;, opp.close_date&#xa;, opp.household_id&#xa;, opp.contact_id&#xa;, opp.stage_name&#xa;, rd.sf_id as rd_sf_id&#xa;, hh.sf_id as hh_sf_id&#xa;FROM opportunities as opp, recurring_donations as rd, households as hh&#xa;WHERE opp.recurring_donation_id is not null&#xa;  AND opp.recurring_donation_id &#x3d; rd.recurring_donation_id&#xa;  AND rd.household_id &#x3d; hh.household_id&#xa;</sql>
+    <sql>SELECT&#xa;  opp.id&#xa;, opp.name&#xa;, opp.amount&#xa;, opp.close_date&#xa;, opp.household_id&#xa;, opp.contact_id&#xa;, opp.stage_name&#xa;, rd.sf_id as rd_sf_id&#xa;, hh.sf_id as hh_sf_id&#xa;, c.sf_id as c_sf_id&#xa;FROM &#xa;  opportunities as opp&#xa;, recurring_donations as rd&#xa;, households as hh&#xa;, contacts as c&#xa;WHERE opp.recurring_donation_id is not null&#xa;  AND opp.recurring_donation_id &#x3d; rd.recurring_donation_id&#xa;  AND rd.household_id &#x3d; hh.household_id&#xa;  AND rd.contact_id &#x3d; c.id&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

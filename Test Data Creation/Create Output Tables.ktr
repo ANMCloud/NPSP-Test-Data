@@ -73,7 +73,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;40.706</created_date>
   <modified_user>admin</modified_user>
-  <modified_date>2015&#x2f;07&#x2f;17 15&#x3a;40&#x3a;16.215</modified_date>
+  <modified_date>2015&#x2f;08&#x2f;03 11&#x3a;57&#x3a;17.068</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -124,34 +124,95 @@
   <hop> <from>contacts exists&#x3f;</from><to>Create contacts table</to><enabled>Y</enabled> </hop>
   <hop> <from>contacts exists&#x3f;</from><to>Table already exists, do nothing</to><enabled>Y</enabled> </hop>
   <hop> <from>check households exists</from><to>households exists&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>households</from><to>check households exists</to><enabled>Y</enabled> </hop>
   <hop> <from>households exists&#x3f;</from><to>Create households table</to><enabled>Y</enabled> </hop>
   <hop> <from>households exists&#x3f;</from><to>Table already exists, do nothing 2</to><enabled>Y</enabled> </hop>
   <hop> <from>check organizations exists</from><to>organizations exists&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>organizations</from><to>check organizations exists</to><enabled>Y</enabled> </hop>
   <hop> <from>organizations exists&#x3f;</from><to>Create organizations table</to><enabled>Y</enabled> </hop>
   <hop> <from>organizations exists&#x3f;</from><to>Table already exists, do nothing 3</to><enabled>Y</enabled> </hop>
   <hop> <from>check opportunities exists</from><to>opportunities exists&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>opportunities</from><to>check opportunities exists</to><enabled>Y</enabled> </hop>
   <hop> <from>opportunities exists&#x3f;</from><to>Create opportunities table</to><enabled>Y</enabled> </hop>
   <hop> <from>opportunities exists&#x3f;</from><to>Table already exists, do nothing 4</to><enabled>Y</enabled> </hop>
   <hop> <from>check oppcontactroles exists</from><to>oppcontactroles exists&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>oppcontactroles</from><to>check oppcontactroles exists</to><enabled>Y</enabled> </hop>
   <hop> <from>oppcontactroles exists&#x3f;</from><to>Create oppcontactroles table</to><enabled>Y</enabled> </hop>
   <hop> <from>oppcontactroles exists&#x3f;</from><to>Table already exists, do nothing 5</to><enabled>Y</enabled> </hop>
   <hop> <from>check recurring_donations exists</from><to>recurring_donations exists&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>recurring_donations</from><to>check recurring_donations exists</to><enabled>Y</enabled> </hop>
   <hop> <from>recurring_donations exists&#x3f;</from><to>Create recurring_donations table</to><enabled>Y</enabled> </hop>
   <hop> <from>recurring_donations exists&#x3f;</from><to>Table already exists, do nothing 6</to><enabled>Y</enabled> </hop>
-  <hop> <from>addresses</from><to>check addresses exists</to><enabled>Y</enabled> </hop>
   <hop> <from>check addresses exists</from><to>addresses exists&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>addresses exists&#x3f;</from><to>Table already exists, do nothing 7</to><enabled>Y</enabled> </hop>
   <hop> <from>addresses exists&#x3f;</from><to>Create addresses table</to><enabled>Y</enabled> </hop>
-  <hop> <from>relationships</from><to>check relationships exists</to><enabled>Y</enabled> </hop>
   <hop> <from>check relationships exists</from><to>relationships exists&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>relationships exists&#x3f;</from><to>Table already exists, do nothing 8</to><enabled>Y</enabled> </hop>
   <hop> <from>relationships exists&#x3f;</from><to>Create relationships table</to><enabled>Y</enabled> </hop>
+  <hop> <from>check gaus exists</from><to>gaus exists&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>check allocations exists</from><to>allocations exists&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>gaus exists&#x3f;</from><to>Table already exists, do nothing 9</to><enabled>Y</enabled> </hop>
+  <hop> <from>allocations exists&#x3f;</from><to>Table already exists, do nothing 10</to><enabled>Y</enabled> </hop>
+  <hop> <from>allocations exists&#x3f;</from><to>Create allocations table</to><enabled>Y</enabled> </hop>
+  <hop> <from>gaus exists&#x3f;</from><to>Create guas table</to><enabled>Y</enabled> </hop>
+  <hop> <from>households</from><to>Wait for Contacts</to><enabled>Y</enabled> </hop>
+  <hop> <from>Wait for Contacts</from><to>check households exists</to><enabled>Y</enabled> </hop>
+  <hop> <from>organizations</from><to>Wait for households</to><enabled>Y</enabled> </hop>
+  <hop> <from>Wait for households</from><to>check organizations exists</to><enabled>Y</enabled> </hop>
+  <hop> <from>opportunities</from><to>Wait for organizations</to><enabled>Y</enabled> </hop>
+  <hop> <from>Wait for organizations</from><to>check opportunities exists</to><enabled>Y</enabled> </hop>
+  <hop> <from>oppcontactroles</from><to>Wait for opportunities</to><enabled>Y</enabled> </hop>
+  <hop> <from>Wait for opportunities</from><to>check oppcontactroles exists</to><enabled>Y</enabled> </hop>
+  <hop> <from>recurring_donations</from><to>Wait for oppcontactroles</to><enabled>Y</enabled> </hop>
+  <hop> <from>Wait for oppcontactroles</from><to>check recurring_donations exists</to><enabled>Y</enabled> </hop>
+  <hop> <from>addresses</from><to>Wait for recurring_donations</to><enabled>Y</enabled> </hop>
+  <hop> <from>Wait for recurring_donations</from><to>check addresses exists</to><enabled>Y</enabled> </hop>
+  <hop> <from>relationships</from><to>Wait for addresses</to><enabled>Y</enabled> </hop>
+  <hop> <from>Wait for addresses</from><to>check relationships exists</to><enabled>Y</enabled> </hop>
+  <hop> <from>gaus</from><to>Wait for relationships</to><enabled>Y</enabled> </hop>
+  <hop> <from>Wait for relationships</from><to>check gaus exists</to><enabled>Y</enabled> </hop>
+  <hop> <from>allocations</from><to>Wait for gaus</to><enabled>Y</enabled> </hop>
+  <hop> <from>Wait for gaus</from><to>check allocations exists</to><enabled>Y</enabled> </hop>
+  <hop> <from>payments</from><to>Wait for allocations</to><enabled>Y</enabled> </hop>
+  <hop> <from>Wait for allocations</from><to>check payments exists</to><enabled>Y</enabled> </hop>
+  <hop> <from>check payments exists</from><to>Payments exists&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Payments exists&#x3f;</from><to>Table already exists, do nothing 11</to><enabled>Y</enabled> </hop>
+  <hop> <from>Payments exists&#x3f;</from><to>Create payments table</to><enabled>Y</enabled> </hop>
+  <hop> <from>Wait for payments</from><to>check campaigns exists</to><enabled>Y</enabled> </hop>
+  <hop> <from>campaigns</from><to>Wait for payments</to><enabled>Y</enabled> </hop>
+  <hop> <from>check campaigns exists</from><to>Campaigns exists&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Campaigns exists&#x3f;</from><to>Table already exists, do nothing 12</to><enabled>Y</enabled> </hop>
+  <hop> <from>Campaigns exists&#x3f;</from><to>Create campaigns table</to><enabled>Y</enabled> </hop>
+  <hop> <from>Wait for campaigns</from><to>check campaign_members exists</to><enabled>Y</enabled> </hop>
+  <hop> <from>campaign_members</from><to>Wait for campaigns</to><enabled>Y</enabled> </hop>
+  <hop> <from>check campaign_members exists</from><to>campaign_members exists&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>campaign_members exists&#x3f;</from><to>Dummy &#x28;do nothing&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>campaign_members exists&#x3f;</from><to>Create campaign_members table</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Campaigns exists&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Table already exists, do nothing 12</send_true_to>
+<send_false_to>Create campaigns table</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>result</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>604</xloc>
+      <yloc>1895</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>Create addresses table</name>
     <type>ExecSQL</type>
@@ -168,7 +229,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE addresses&#xa;&#x28;&#xa;  address_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, household_id TEXT&#xa;, country TEXT&#xa;, street TEXT&#xa;, state TEXT&#xa;, city TEXT&#xa;, zip TEXT&#xa;, start_month TEXT&#xa;, start_day TEXT&#xa;, end_month TEXT&#xa;, end_day TEXT&#xa;, sf_id NUMERIC&#xa;&#x29;&#xa;&#x3b;</sql>
+    <sql>CREATE TABLE addresses&#xa;&#x28;&#xa;  address_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, household_id TEXT&#xa;, country TEXT&#xa;, street TEXT&#xa;, state TEXT&#xa;, city TEXT&#xa;, zip TEXT&#xa;, start_month TEXT&#xa;, start_day TEXT&#xa;, end_month TEXT&#xa;, end_day TEXT&#xa;, sf_id NUMERIC&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX addresses_id ON addresses &#x28;address_id&#x29;&#x3b;&#xa;CREATE INDEX addresses_household_id ON addresses &#x28;household_id&#x29;&#x3b;&#xa;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -178,8 +239,104 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>669</xloc>
-      <yloc>1133</yloc>
+      <xloc>825</xloc>
+      <yloc>1132</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Create allocations table</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>CREATE TABLE allocations&#xa;&#x28;&#xa;  allocation_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, opportunity_id TEXT&#xa;, gau_id NUMERIC&#xa;, percent NUMERIC&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX allocations_id ON allocations &#x28;allocation_id&#x29;&#x3b;&#xa;CREATE INDEX allocations_opportunity_id ON allocations &#x28;opportunity_id&#x29;&#x3b;&#xa;CREATE INDEX allocations_gau_id ON allocations &#x28;gau_id&#x29;&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>798</xloc>
+      <yloc>1626</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Create campaign_members table</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>CREATE TABLE campaign_members&#xa;&#x28;&#xa;  member_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, contact_id TEXT&#xa;, campaign_id INTEGER&#xa;, status TEXT&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX campaign_members_id ON campaign_members &#x28;member_id&#x29;&#x3b;&#xa;CREATE INDEX campaign_members_contact_id ON campaign_members &#x28;contact_id&#x29;&#x3b;&#xa;CREATE INDEX campaign_members_campaign_id ON campaign_members &#x28;campaign_id&#x29;&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>785</xloc>
+      <yloc>2167</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Create campaigns table</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>CREATE TABLE campaigns&#xa;&#x28;&#xa;  campaign_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, name TEXT&#xa;, percent NUMERIC&#xa;, members NUMERIC&#xa;, allocations NUMERIC&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX campaigns_id ON campaigns &#x28;campaign_id&#x29;&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>787</xloc>
+      <yloc>1980</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -200,7 +357,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE contacts&#xa;&#x28;&#xa;  id NUMERIC&#xa;, salutation TEXT&#xa;, first_name TEXT&#xa;, last_name TEXT&#xa;, email TEXT&#xa;, phone TEXT&#xa;, organization TEXT&#xa;, job_title TEXT&#xa;, recurring_amount NUMERIC&#xa;, donation_amount NUMERIC&#xa;, household_id NUMERIC&#xa;, organization_id NUMERIC&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;</sql>
+    <sql>CREATE TABLE contacts&#xa;&#x28;&#xa;  id NUMERIC&#xa;, salutation TEXT&#xa;, first_name TEXT&#xa;, last_name TEXT&#xa;, email TEXT&#xa;, phone TEXT&#xa;, organization TEXT&#xa;, job_title TEXT&#xa;, recurring_amount NUMERIC&#xa;, donation_amount NUMERIC&#xa;, household_id NUMERIC&#xa;, organization_id NUMERIC&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX contacts_id ON contacts &#x28;id&#x29;&#x3b;&#xa;CREATE INDEX contacts_household_id ON contacts&#x28;household_id&#x29;&#x3b;&#xa;CREATE INDEX contacts_organization_id ON contacts&#x28;organization_id&#x29;&#x3b;&#xa;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -212,6 +369,38 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>573</xloc>
       <yloc>116</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Create guas table</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>CREATE TABLE gaus&#xa;&#x28;&#xa;  id NUMERIC&#xa;, name TEXT&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX gau_id ON gaus &#x28;id&#x29;&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>796</xloc>
+      <yloc>1469</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -232,7 +421,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE households&#xa;&#x28;&#xa;  household_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, country TEXT&#xa;, street TEXT&#xa;, state TEXT&#xa;, city TEXT&#xa;, zip TEXT&#xa;, contact_id NUMERIC&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;</sql>
+    <sql>CREATE TABLE households&#xa;&#x28;&#xa;  household_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, country TEXT&#xa;, street TEXT&#xa;, state TEXT&#xa;, city TEXT&#xa;, zip TEXT&#xa;, contact_id NUMERIC&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX households_household_id ON households &#x28;household_id&#x29;&#x3b;&#xa;CREATE INDEX households_contact_id ON households &#x28;contact_id&#x29;&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -242,7 +431,7 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>572</xloc>
+      <xloc>782</xloc>
       <yloc>278</yloc>
       <draw>Y</draw>
       </GUI>
@@ -264,7 +453,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE oppcontactroles&#xa;&#x28;&#xa;  ocr_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, contact_id TEXT&#xa;, opportunity_id NUMERIC&#xa;, role TEXT&#xa;, is_primary CHAR&#x28;1&#x29;&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;</sql>
+    <sql>CREATE TABLE oppcontactroles&#xa;&#x28;&#xa;  ocr_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, contact_id TEXT&#xa;, opportunity_id NUMERIC&#xa;, role TEXT&#xa;, is_primary CHAR&#x28;1&#x29;&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX oppcontactroles_ocr_id ON oppcontactroles &#x28;ocr_id&#x29;&#x3b;&#xa;CREATE INDEX oppcontactroles_opportunity_id ON oppcontactroles &#x28;opportunity_id&#x29;&#x3b;&#xa;CREATE INDEX oppcontactroles_contact_id ON oppcontactroles &#x28;contact_id&#x29;&#x3b;&#xa;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -274,8 +463,8 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>615</xloc>
-      <yloc>808</yloc>
+      <xloc>771</xloc>
+      <yloc>807</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -296,7 +485,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE opportunities&#xa;&#x28;&#xa;  id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, name TEXT&#xa;, amount NUMERIC&#xa;, close_date DATETIME&#xa;, organization_id TEXT&#xa;, household_id TEXT&#xa;, contact_id TEXT&#xa;, recurring_donation_id TEXT&#xa;, sf_id TEXT&#xa;, stage_name TEXT DEFAULT &#x27;Closed Won&#x27;&#xa;&#x29;&#xa;&#x3b;</sql>
+    <sql>CREATE TABLE opportunities&#xa;&#x28;&#xa;  id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, name TEXT&#xa;, amount NUMERIC&#xa;, close_date DATETIME&#xa;, organization_id TEXT&#xa;, household_id TEXT&#xa;, contact_id TEXT&#xa;, recurring_donation_id TEXT&#xa;, dont_create_payments CHAR&#x28;1&#x29; DEFAULT 0&#xa;, stage_name TEXT DEFAULT &#x27;Closed Won&#x27;&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX opportunities_id ON opportunities &#x28;id&#x29;&#x3b;&#xa;CREATE INDEX opportunities_organization_id ON opportunities &#x28;organization_id&#x29;&#x3b;&#xa;CREATE INDEX opportunities_household_id ON opportunities &#x28;household_id&#x29;&#x3b;&#xa;CREATE INDEX opportunities_recurring_donation_id ON opportunities &#x28;recurring_donation_id&#x29;&#x3b;&#xa;CREATE INDEX opportunities_contact_id ON opportunities &#x28;contact_id&#x29;&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -306,7 +495,7 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>565</xloc>
+      <xloc>775</xloc>
       <yloc>649</yloc>
       <draw>Y</draw>
       </GUI>
@@ -328,7 +517,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE organizations&#xa;&#x28;&#xa;  organization_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, organization TEXT&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;</sql>
+    <sql>CREATE TABLE organizations&#xa;&#x28;&#xa;  organization_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, organization TEXT&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX organizations_organization_id ON organizations &#x28;organization_id&#x29;&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -338,8 +527,40 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>568</xloc>
+      <xloc>778</xloc>
       <yloc>476</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Create payments table</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>CREATE TABLE payments&#xa;&#x28;&#xa;  payment_id NUMERIC&#xa;, opportunity_id TEXT&#xa;, amount NUMERIC&#xa;, payment_number NUMERIC&#xa;, payment_date DATETIME&#xa;, paid CHAR&#x28;1&#x29;&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX payments_id ON payments &#x28;payment_id&#x29;&#x3b;&#xa;CREATE INDEX payments_opportunity_id ON payments &#x28;opportunity_id&#x29;&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>795</xloc>
+      <yloc>1804</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -360,7 +581,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE recurring_donations&#xa;&#x28;&#xa;  recurring_donation_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, household_id TEXT&#xa;, contact_id TEXT&#xa;, start_date DATETIME&#xa;, amount NUMERIC&#xa;, name TEXT&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;</sql>
+    <sql>CREATE TABLE recurring_donations&#xa;&#x28;&#xa;  recurring_donation_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, household_id TEXT&#xa;, contact_id TEXT&#xa;, start_date DATETIME&#xa;, amount NUMERIC&#xa;, name TEXT&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX recurring_donations_id ON recurring_donations &#x28;recurring_donation_id&#x29;&#x3b;&#xa;CREATE INDEX recurring_donations_household_id ON recurring_donations &#x28;household_id&#x29;&#x3b;&#xa;CREATE INDEX recurring_donations_contact_id ON recurring_donations &#x28;contact_id&#x29;&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -370,8 +591,88 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>656</xloc>
-      <yloc>958</yloc>
+      <xloc>812</xloc>
+      <yloc>957</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Create relationships table</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>CREATE TABLE relationships&#xa;&#x28;&#xa;  relationship_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, contact_id TEXT&#xa;, related_contact_id TEXT&#xa;, relationship_type TEXT&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX relationships_id ON relationships &#x28;relationship_id&#x29;&#x3b;&#xa;CREATE INDEX relationships_contact_id ON relationships &#x28;contact_id&#x29;&#x3b;&#xa;CREATE INDEX relationships_related_contact_id ON relationships &#x28;related_contact_id&#x29;&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>795</xloc>
+      <yloc>1289</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dummy &#x28;do nothing&#x29;</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>788</xloc>
+      <yloc>2081</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Payments exists&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Table already exists, do nothing 11</send_true_to>
+<send_false_to>Create payments table</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>result</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>604</xloc>
+      <yloc>1723</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -396,6 +697,63 @@
     </step>
 
   <step>
+    <name>Table already exists, do nothing 10</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>795</xloc>
+      <yloc>1552</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Table already exists, do nothing 11</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>790</xloc>
+      <yloc>1720</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Table already exists, do nothing 12</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>789</xloc>
+      <yloc>1888</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Table already exists, do nothing 2</name>
     <type>Dummy</type>
     <description/>
@@ -408,7 +766,7 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>573</xloc>
+      <xloc>783</xloc>
       <yloc>210</yloc>
       <draw>Y</draw>
       </GUI>
@@ -427,7 +785,7 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>569</xloc>
+      <xloc>779</xloc>
       <yloc>408</yloc>
       <draw>Y</draw>
       </GUI>
@@ -446,7 +804,7 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>566</xloc>
+      <xloc>776</xloc>
       <yloc>581</yloc>
       <draw>Y</draw>
       </GUI>
@@ -465,8 +823,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>616</xloc>
-      <yloc>740</yloc>
+      <xloc>772</xloc>
+      <yloc>739</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -484,8 +842,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>657</xloc>
-      <yloc>890</yloc>
+      <xloc>813</xloc>
+      <yloc>889</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -503,8 +861,346 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>667</xloc>
-      <yloc>1054</yloc>
+      <xloc>823</xloc>
+      <yloc>1053</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Table already exists, do nothing 8</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>793</xloc>
+      <yloc>1210</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Table already exists, do nothing 9</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>794</xloc>
+      <yloc>1403</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Wait for Contacts</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Create contacts table</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>243</xloc>
+      <yloc>241</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Wait for addresses</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Create addresses table</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>221</xloc>
+      <yloc>1221</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Wait for allocations</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Create allocations table</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>222</xloc>
+      <yloc>1726</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Wait for campaigns</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Create campaigns table</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>222</xloc>
+      <yloc>2077</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Wait for gaus</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Create guas table</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>221</xloc>
+      <yloc>1539</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Wait for households</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Create households table</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>242</xloc>
+      <yloc>438</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Wait for oppcontactroles</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Create oppcontactroles table</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>214</xloc>
+      <yloc>921</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Wait for opportunities</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Create opportunities table</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>215</xloc>
+      <yloc>771</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Wait for organizations</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Create organizations table</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>230</xloc>
+      <yloc>610</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Wait for payments</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Create payments table</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>219</xloc>
+      <yloc>1897</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Wait for recurring_donations</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Create recurring_donations table</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>217</xloc>
+      <yloc>1101</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Wait for relationships</name>
+    <type>BlockUntilStepsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <steps>
+      <step>
+        <name>Create relationships table</name>
+        <CopyNr>0</CopyNr>
+        </step>
+      </steps>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>223</xloc>
+      <yloc>1406</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -570,8 +1266,180 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>456</xloc>
-      <yloc>1102</yloc>
+      <xloc>612</xloc>
+      <yloc>1101</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>allocations</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>table</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>allocations</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>72</xloc>
+      <yloc>1538</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>allocations exists&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Table already exists, do nothing 10</send_true_to>
+<send_false_to>Create allocations table</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>result</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>607</xloc>
+      <yloc>1552</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>campaign_members</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>table</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>campaign_members</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>80</xloc>
+      <yloc>2079</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>campaign_members exists&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Dummy &#x28;do nothing&#x29;</send_true_to>
+<send_false_to>Create campaign_members table</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>result</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>606</xloc>
+      <yloc>2074</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>campaigns</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>table</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>campaigns</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>77</xloc>
+      <yloc>1899</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -593,8 +1461,77 @@
     <schemaname/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>254</xloc>
-      <yloc>1102</yloc>
+      <xloc>410</xloc>
+      <yloc>1101</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>check allocations exists</name>
+    <type>TableExists</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <tablenamefield>table</tablenamefield>
+    <resultfieldname>result</resultfieldname>
+    <schemaname/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>409</xloc>
+      <yloc>1553</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>check campaign_members exists</name>
+    <type>TableExists</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <tablenamefield>table</tablenamefield>
+    <resultfieldname>result</resultfieldname>
+    <schemaname/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>410</xloc>
+      <yloc>2073</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>check campaigns exists</name>
+    <type>TableExists</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <tablenamefield>table</tablenamefield>
+    <resultfieldname>result</resultfieldname>
+    <schemaname/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>407</xloc>
+      <yloc>1893</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -623,6 +1560,29 @@
     </step>
 
   <step>
+    <name>check gaus exists</name>
+    <type>TableExists</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <tablenamefield>table</tablenamefield>
+    <resultfieldname>result</resultfieldname>
+    <schemaname/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>402</xloc>
+      <yloc>1420</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>check households exists</name>
     <type>TableExists</type>
     <description/>
@@ -639,7 +1599,7 @@
     <schemaname/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>224</xloc>
+      <xloc>434</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
       </GUI>
@@ -662,8 +1622,8 @@
     <schemaname/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>229</xloc>
-      <yloc>770</yloc>
+      <xloc>385</xloc>
+      <yloc>769</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -685,7 +1645,7 @@
     <schemaname/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>217</xloc>
+      <xloc>427</xloc>
       <yloc>611</yloc>
       <draw>Y</draw>
       </GUI>
@@ -708,8 +1668,31 @@
     <schemaname/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>220</xloc>
+      <xloc>430</xloc>
       <yloc>438</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>check payments exists</name>
+    <type>TableExists</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <tablenamefield>table</tablenamefield>
+    <resultfieldname>result</resultfieldname>
+    <schemaname/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>410</xloc>
+      <yloc>1722</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -731,8 +1714,31 @@
     <schemaname/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>250</xloc>
-      <yloc>922</yloc>
+      <xloc>406</xloc>
+      <yloc>921</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>check relationships exists</name>
+    <type>TableExists</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <tablenamefield>table</tablenamefield>
+    <resultfieldname>result</resultfieldname>
+    <schemaname/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>409</xloc>
+      <yloc>1221</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -805,6 +1811,73 @@
     </step>
 
   <step>
+    <name>gaus</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>table</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>gaus</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>65</xloc>
+      <yloc>1395</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>gaus exists&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Table already exists, do nothing 9</send_true_to>
+<send_false_to>Create guas table</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>result</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>Boolean</type><text>Y</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>603</xloc>
+      <yloc>1420</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>households</name>
     <type>RowGenerator</type>
     <description/>
@@ -865,7 +1938,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>382</xloc>
+      <xloc>592</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
       </GUI>
@@ -932,8 +2005,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>429</xloc>
-      <yloc>770</yloc>
+      <xloc>585</xloc>
+      <yloc>769</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -999,7 +2072,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>379</xloc>
+      <xloc>589</xloc>
       <yloc>611</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1066,8 +2139,46 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>378</xloc>
+      <xloc>588</xloc>
       <yloc>438</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>payments</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>table</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>payments</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>78</xloc>
+      <yloc>1716</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1133,8 +2244,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>470</xloc>
-      <yloc>920</yloc>
+      <xloc>626</xloc>
+      <yloc>919</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1178,29 +2289,6 @@
     </step>
 
   <step>
-    <name>check relationships exists</name>
-    <type>TableExists</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>npsp_test_data.db</connection>
-    <tablenamefield>table</tablenamefield>
-    <resultfieldname>result</resultfieldname>
-    <schemaname/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>253</xloc>
-      <yloc>1222</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>relationships exists&#x3f;</name>
     <type>FilterRows</type>
     <description/>
@@ -1223,59 +2311,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>453</xloc>
-      <yloc>1222</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Create relationships table</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>npsp_test_data.db</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>CREATE TABLE relationships&#xa;&#x28;&#xa;  relationship_id INTEGER PRIMARY KEY AUTOINCREMENT&#xa;, contact_id TEXT&#xa;, related_contact_id TEXT&#xa;, relationship_type TEXT&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>639</xloc>
-      <yloc>1290</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Table already exists, do nothing 8</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>637</xloc>
-      <yloc>1211</yloc>
+      <xloc>609</xloc>
+      <yloc>1221</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

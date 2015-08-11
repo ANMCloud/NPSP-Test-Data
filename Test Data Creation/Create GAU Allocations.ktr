@@ -1,26 +1,26 @@
 <transformation>
   <info>
-    <name>Insert Household Accounts</name>
+    <name>Create GAU Allocations</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
-    <directory>&#x2f;Test Data Deployment</directory>
+    <directory>&#x2f;Test Data Creation</directory>
     <parameters>
         <parameter>
             <name>WORKING_DIR</name>
-            <default_value>&#x2f;usr&#x2f;local&#x2f;kettle&#x2f;npsp_test_data_deploy</default_value>
+            <default_value>&#x2f;usr&#x2f;local&#x2f;kettle&#x2f;npsp_test_data_creation</default_value>
             <description/>
         </parameter>
         <parameter>
-            <name>sf_pass</name>
-            <default_value>Oid75UlJA18l</default_value>
+            <name>allocations_per_opp</name>
+            <default_value>10</default_value>
             <description/>
         </parameter>
         <parameter>
-            <name>sf_user</name>
-            <default_value>mrbelvedere&#x40;npsp.ldv01</default_value>
+            <name>opps_with_allocations</name>
+            <default_value>100</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -81,9 +81,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user/>
-  <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.182</created_date>
+  <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;40.300</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;07&#x2f;30 10&#x3a;18&#x3a;08.073</modified_date>
+  <modified_date>2015&#x2f;07&#x2f;19 13&#x3a;12&#x3a;49.687</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -112,17 +112,42 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>households</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>HH_Account Record Type</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Create Temp HH Name</to><enabled>Y</enabled> </hop>
-  <hop> <from>Create Temp HH Name</from><to>Add system_account_type</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add system_account_type</from><to>Salesforce Insert</to><enabled>Y</enabled> </hop>
-  <hop> <from>Salesforce Insert</from><to>Blocking Step</to><enabled>Y</enabled> </hop>
-  <hop> <from>Blocking Step</from><to>Update</to><enabled>Y</enabled> </hop>
+  <hop> <from>All Opportunities</from><to>Sample Opportunities</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sample Opportunities</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Add allocation_id</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add allocation_id</from><to>Calculate gau_id and amount</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculate gau_id and amount</from><to>Write to allocations</to><enabled>Y</enabled> </hop>
+  <hop> <from>Generate Allocation Rows</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Add system_account_type</name>
-    <type>Constant</type>
+    <name>All Opportunities</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <sql>SELECT&#xa;  id as opp_id&#xa;, name&#xa;, amount&#xa;, close_date&#xa;, stage_name&#xa;FROM opportunities&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>83</xloc>
+      <yloc>97</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Generate Allocation Rows</name>
+    <type>RowGenerator</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -133,108 +158,27 @@
            </partitioning>
     <fields>
       <field>
-        <name>system_account_type</name>
+        <name>dummy</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Household Account</nullif>
+        <nullif/>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
     </fields>
+    <limit>&#x24;&#x7b;allocations_per_opp&#x7d;</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>686</xloc>
-      <yloc>173</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Create Temp HH Name</name>
-    <type>Formula</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>hh_name</field_name>
-<formula_string>&#x22;Household &#x22; &#x26; &#x5b;household_id&#x5d;</formula_string>
-<value_type>String</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>517</xloc>
-      <yloc>174</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>HH_Account Record Type</name>
-    <type>SalesforceInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
-    <username>&#x24;&#x7b;sf_user&#x7d;</username>
-    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>RecordType</module>
-    <condition>SobjectType &#x3d; &#x27;Account&#x27; and DeveloperName &#x3d; &#x27;hh_account&#x27;</condition>
-    <specifyQuery>N</specifyQuery>
-    <query/>
-    <include_targeturl>N</include_targeturl>
-    <targeturl_field/>
-    <include_module>N</include_module>
-    <module_field/>
-    <include_rownum>N</include_rownum>
-    <include_deletion_date>N</include_deletion_date>
-    <deletion_date_field/>
-    <rownum_field/>
-    <include_sql>N</include_sql>
-    <sql_field/>
-    <include_Timestamp>N</include_Timestamp>
-    <timestamp_field/>
-    <read_from/>
-    <read_to/>
-    <records_filter>all</records_filter>
-    <useCompression>N</useCompression>
-    <queryAll>N</queryAll>
-    <fields>
-      <field>
-        <name>Record Type ID</name>
-        <field>Id</field>
-        <idlookup>Y</idlookup>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>18</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        </field>
-      </fields>
-    <limit>0</limit>
-    <timeout>60000</timeout>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>169</xloc>
-      <yloc>38</yloc>
+      <xloc>228</xloc>
+      <yloc>17</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -264,84 +208,36 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>314</xloc>
-      <yloc>172</yloc>
+      <xloc>406</xloc>
+      <yloc>129</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Salesforce Insert</name>
-    <type>SalesforceInsert</type>
+    <name>Sample Opportunities</name>
+    <type>ReservoirSampling</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
-    <username>&#x24;&#x7b;sf_user&#x7d;</username>
-    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Account</module>
-    <batchSize>200</batchSize>
-    <salesforceIDFieldName>account_id</salesforceIDFieldName>
-    <fields>
-      <field>
-        <name>Name</name>
-        <field>hh_name</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>BillingCountry</name>
-        <field>country</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>BillingStreet</name>
-        <field>street</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>BillingCity</name>
-        <field>city</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>BillingState</name>
-        <field>state</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>BillingPostalCode</name>
-        <field>zip</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>RecordTypeId</name>
-        <field>Record Type ID</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      <field>
-        <name>npe01__SYSTEM_AccountType__c</name>
-        <field>system_account_type</field>
-        <useExternalId>N</useExternalId>
-      </field>
-      </fields>
-    <timeout>60000</timeout>
-    <useCompression>N</useCompression>
-    <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
-     <cluster_schema/>
+<reservoir_sampling><sample_size>&#x24;&#x7b;opps_with_allocations&#x7d;</sample_size>
+<seed>1</seed>
+</reservoir_sampling>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>880</xloc>
-      <yloc>176</yloc>
+      <xloc>229</xloc>
+      <yloc>129</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Update</name>
-    <type>Update</type>
+    <name>Calculate gau_id and amount</name>
+    <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -350,37 +246,63 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>npsp_test_data.db</connection>
-    <skip_lookup>N</skip_lookup>
-    <commit>100</commit>
-    <use_batch>N</use_batch>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
-    <lookup>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var gau_id &#x3d; Math.floor&#x28;&#x28;Math.random&#x28;&#x29; &#x2a; 1000&#x29; &#x2b; 1&#x29;&#x3b;&#xa;var allocations_per_opp &#x3d; getVariable&#x28;&#x27;allocations_per_opp&#x27;, 10&#x29;&#x3b;&#xa;var percent &#x3d; Math.floor&#x28;100 &#x2f; allocations_per_opp&#x29;&#x3b;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>gau_id</name>
+        <rename>gau_id</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>percent</name>
+        <rename>percent</rename>
+        <type>Number</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>710</xloc>
+      <yloc>129</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add allocation_id</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>payment_id</valuename>
+      <use_database>N</use_database>
+      <connection>npsp_test_data.db</connection>
       <schema/>
-      <table>households</table>
-      <key>
-        <name>household_id</name>
-        <field>household_id</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-        </key>
-      <value>
-        <name>sf_id</name>
-        <rename>account_id</rename>
-        </value>
-      </lookup>
+      <seqname>SEQ_</seqname>
+      <use_counter>Y</use_counter>
+      <counter_name/>
+      <start_at>1</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1065</xloc>
-      <yloc>177</yloc>
+      <xloc>553</xloc>
+      <yloc>129</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>households</name>
-    <type>TableInput</type>
+    <name>Write to allocations</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -390,40 +312,40 @@
            <schema_name/>
            </partitioning>
     <connection>npsp_test_data.db</connection>
-    <sql>SELECT&#xa;  household_id&#xa;, country&#xa;, street&#xa;, state&#xa;, city&#xa;, zip&#xa;, contact_id&#xa;FROM households&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <schema/>
+    <table>allocations</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>opportunity_id</column_name>
+          <stream_name>opp_id</stream_name>
+        </field>
+        <field>
+          <column_name>gau_id</column_name>
+          <stream_name>gau_id</stream_name>
+        </field>
+        <field>
+          <column_name>percent</column_name>
+          <stream_name>percent</stream_name>
+        </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>99</xloc>
-      <yloc>172</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Blocking Step</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <pass_all_rows>Y</pass_all_rows>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>block</prefix>
-      <cache_size>5000</cache_size>
-      <compress>Y</compress>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>982</xloc>
-      <yloc>176</yloc>
+      <xloc>873</xloc>
+      <yloc>129</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

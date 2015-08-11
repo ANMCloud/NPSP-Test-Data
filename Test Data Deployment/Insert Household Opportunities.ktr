@@ -83,7 +83,7 @@
   <created_user>-</created_user>
   <created_date>2015&#x2f;06&#x2f;23 11&#x3a;15&#x3a;30.548</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;07&#x2f;17 12&#x3a;35&#x3a;21.933</modified_date>
+  <modified_date>2015&#x2f;08&#x2f;03 14&#x3a;14&#x3a;39.593</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -114,8 +114,33 @@
   <order>
   <hop> <from>Household Opportunities</from><to>Format dates and pass household fields</to><enabled>Y</enabled> </hop>
   <hop> <from>Format dates and pass household fields</from><to>Insert Opportunites</to><enabled>Y</enabled> </hop>
-  <hop> <from>Insert Opportunites</from><to>Update sf_id</to><enabled>Y</enabled> </hop>
+  <hop> <from>Insert Opportunites</from><to>Blocking Step</to><enabled>Y</enabled> </hop>
+  <hop> <from>Blocking Step</from><to>Update sf_id</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Blocking Step</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <pass_all_rows>Y</pass_all_rows>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>block</prefix>
+      <cache_size>5000</cache_size>
+      <compress>Y</compress>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>754</xloc>
+      <yloc>66</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>Format dates and pass household fields</name>
     <type>SelectValues</type>
@@ -155,6 +180,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>dont_create_payments</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>Y</select_unspecified>
       <meta>        <name>close_date</name>
         <rename>close_date</rename>
@@ -191,7 +220,7 @@
            <schema_name/>
            </partitioning>
     <connection>npsp_test_data.db</connection>
-    <sql>SELECT &#xa;  opp.id&#xa;, opp.name&#xa;, opp.amount&#xa;, opp.close_date&#xa;, h.sf_id as h_sf_id&#xa;, opp.stage_name&#xa;, c.sf_id as c_sf_id&#xa;&#xa;FROM &#xa;  opportunities opp&#xa;, households h&#xa;, contacts c&#xa;&#xa;WHERE h.household_id is not null&#xa;and opp.recurring_donation_id is null &#xa;and h.household_id &#x3d; opp.household_id&#xa;and opp.contact_id &#x3d; c.id&#xa;&#x3b;</sql>
+    <sql>SELECT &#xa;  opp.id&#xa;, opp.name&#xa;, opp.amount&#xa;, opp.close_date&#xa;, h.sf_id as h_sf_id&#xa;, opp.stage_name&#xa;, opp.dont_create_payments&#xa;, c.sf_id as c_sf_id&#xa;&#xa;FROM &#xa;  opportunities opp&#xa;, households h&#xa;, contacts c&#xa;&#xa;WHERE h.household_id is not null&#xa;and opp.recurring_donation_id is null &#xa;and h.household_id &#x3d; opp.household_id&#xa;and opp.contact_id &#x3d; c.id&#xa;&#x3b;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -252,6 +281,11 @@
         <field>c_sf_id</field>
         <useExternalId>N</useExternalId>
       </field>
+      <field>
+        <name>npe01__Do_Not_Automatically_Create_Payment__c</name>
+        <field>dont_create_payments</field>
+        <useExternalId>N</useExternalId>
+      </field>
       </fields>
     <timeout>60000</timeout>
     <useCompression>N</useCompression>
@@ -297,7 +331,7 @@
       </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>762</xloc>
+      <xloc>920</xloc>
       <yloc>65</yloc>
       <draw>Y</draw>
       </GUI>

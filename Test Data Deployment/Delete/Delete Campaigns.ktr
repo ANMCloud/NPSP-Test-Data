@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>Delete Contacts</name>
+    <name>Delete Campaigns</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -76,17 +76,17 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2015&#x2f;07&#x2f;10 09&#x3a;05&#x3a;40.462</created_date>
+  <created_date>2015&#x2f;07&#x2f;10 09&#x3a;05&#x3a;41.075</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;08&#x2f;03 18&#x3a;10&#x3a;37.841</modified_date>
+  <modified_date>2015&#x2f;07&#x2f;30 16&#x3a;19&#x3a;57.182</modified_date>
   </info>
   <notepads>
   </notepads>
   <order>
-  <hop> <from>Get Contacts by ID</from><to>Delete Contacts</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Campaigns by ID</from><to>Delete Campaigns</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Delete Contacts</name>
+    <name>Delete Campaigns</name>
     <type>SalesforceDelete</type>
     <description/>
     <distribute>Y</distribute>
@@ -98,22 +98,22 @@
            </partitioning>
     <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
     <username>&#x24;&#x7b;sf_user&#x7d;</username>
-    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Contact</module>
-    <DeleteField>Contact ID</DeleteField>
-    <batchSize>100</batchSize>
+    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Campaign</module>
+    <DeleteField>Id</DeleteField>
+    <batchSize>200</batchSize>
     <timeout>60000</timeout>
     <useCompression>N</useCompression>
     <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>361</xloc>
-      <yloc>66</yloc>
+      <xloc>385</xloc>
+      <yloc>78</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get Contacts by ID</name>
+    <name>Get Campaigns by ID</name>
     <type>SalesforceInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -125,7 +125,7 @@
            </partitioning>
     <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
     <username>&#x24;&#x7b;sf_user&#x7d;</username>
-    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Contact</module>
+    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Campaign</module>
     <condition/>
     <specifyQuery>N</specifyQuery>
     <query/>
@@ -148,7 +148,7 @@
     <queryAll>N</queryAll>
     <fields>
       <field>
-        <name>Contact ID</name>
+        <name>Id</name>
         <field>Id</field>
         <idlookup>Y</idlookup>
         <type>String</type>
@@ -166,8 +166,8 @@
     <timeout>60000</timeout>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>103</xloc>
-      <yloc>66</yloc>
+      <xloc>104</xloc>
+      <yloc>77</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

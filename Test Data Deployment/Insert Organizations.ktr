@@ -83,9 +83,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.221</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;06&#x2f;19 14&#x3a;16&#x3a;59.416</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
-    <is_key_private>N</is_key_private>
+  <modified_date>2015&#x2f;07&#x2f;30 10&#x3a;18&#x3a;29.772</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -116,8 +114,9 @@
   <order>
   <hop> <from>Organization Record Type</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>organizations</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Insert Organization Accounts</from><to>Update</to><enabled>Y</enabled> </hop>
   <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Insert Organization Accounts</to><enabled>Y</enabled> </hop>
+  <hop> <from>Insert Organization Accounts</from><to>Blocking Step</to><enabled>Y</enabled> </hop>
+  <hop> <from>Blocking Step</from><to>Update</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Insert Organization Accounts</name>
@@ -282,7 +281,7 @@
       </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>729</xloc>
+      <xloc>838</xloc>
       <yloc>181</yloc>
       <draw>Y</draw>
       </GUI>
@@ -309,6 +308,30 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>119</xloc>
+      <yloc>182</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Blocking Step</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <pass_all_rows>Y</pass_all_rows>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>block</prefix>
+      <cache_size>5000</cache_size>
+      <compress>Y</compress>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>721</xloc>
       <yloc>182</yloc>
       <draw>Y</draw>
       </GUI>

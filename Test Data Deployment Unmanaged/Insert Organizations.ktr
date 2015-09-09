@@ -1,13 +1,18 @@
 <transformation>
   <info>
-    <name>Delete Cases</name>
+    <name>Insert Organizations</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
-    <directory>&#x2f;Test Data Deployment&#x2f;Delete</directory>
+    <directory>&#x2f;Test Data Deployment</directory>
     <parameters>
+        <parameter>
+            <name>WORKING_DIR</name>
+            <default_value>&#x2f;usr&#x2f;local&#x2f;kettle&#x2f;npsp_test_data_deploy</default_value>
+            <description/>
+        </parameter>
         <parameter>
             <name>sf_pass</name>
             <default_value>Oid75UlJA18l</default_value>
@@ -75,19 +80,47 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-  <created_user>-</created_user>
-  <created_date>2015&#x2f;07&#x2f;10 09&#x3a;05&#x3a;39.555</created_date>
+  <created_user/>
+  <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.221</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;08&#x2f;11 09&#x3a;25&#x3a;55.072</modified_date>
+  <modified_date>2015&#x2f;07&#x2f;30 10&#x3a;18&#x3a;29.772</modified_date>
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>npsp_test_data.db</name>
+    <server>localhost</server>
+    <type>SQLITE</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;WORKING_DIR&#x7d;&#x2f;npsp_test_data.db</database>
+    <port>-1</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>-1</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
-  <hop> <from>Get Cases by ID</from><to>Delete Cases</to><enabled>Y</enabled> </hop>
+  <hop> <from>Organization Record Type</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>organizations</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Insert Organization Accounts</to><enabled>Y</enabled> </hop>
+  <hop> <from>Insert Organization Accounts</from><to>Blocking Step</to><enabled>Y</enabled> </hop>
+  <hop> <from>Blocking Step</from><to>Update</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Delete Cases</name>
-    <type>SalesforceDelete</type>
+    <name>Insert Organization Accounts</name>
+    <type>SalesforceInsert</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -98,22 +131,65 @@
            </partitioning>
     <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
     <username>&#x24;&#x7b;sf_user&#x7d;</username>
-    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Case</module>
-    <DeleteField>Case ID</DeleteField>
+    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Account</module>
     <batchSize>200</batchSize>
+    <salesforceIDFieldName>account_id</salesforceIDFieldName>
+    <fields>
+      <field>
+        <name>Name</name>
+        <field>organization</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>RecordTypeId</name>
+        <field>Record Type ID</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      </fields>
     <timeout>60000</timeout>
     <useCompression>N</useCompression>
     <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>456</xloc>
-      <yloc>46</yloc>
+      <xloc>568</xloc>
+      <yloc>181</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get Cases by ID</name>
+    <name>Join Rows &#x28;cartesian product&#x29;</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <cache_size>500</cache_size>
+      <main/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue/>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>334</xloc>
+      <yloc>182</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Organization Record Type</name>
     <type>SalesforceInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -125,8 +201,8 @@
            </partitioning>
     <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
     <username>&#x24;&#x7b;sf_user&#x7d;</username>
-    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Case</module>
-    <condition/>
+    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>RecordType</module>
+    <condition>SobjectType &#x3d; &#x27;Account&#x27; and DeveloperName &#x3d; &#x27;Organization&#x27;</condition>
     <specifyQuery>N</specifyQuery>
     <query/>
     <include_targeturl>N</include_targeturl>
@@ -148,7 +224,7 @@
     <queryAll>N</queryAll>
     <fields>
       <field>
-        <name>Case ID</name>
+        <name>Record Type ID</name>
         <field>Id</field>
         <idlookup>Y</idlookup>
         <type>String</type>
@@ -166,8 +242,97 @@
     <timeout>60000</timeout>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>111</xloc>
-      <yloc>46</yloc>
+      <xloc>195</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Update</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema/>
+      <table>organizations</table>
+      <key>
+        <name>organization_id</name>
+        <field>organization_id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+        </key>
+      <value>
+        <name>sf_id</name>
+        <rename>account_id</rename>
+        </value>
+      </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>838</xloc>
+      <yloc>181</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>organizations</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <sql>SELECT&#xa;  organization_id&#xa;, organization&#xa;FROM organizations&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>119</xloc>
+      <yloc>182</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Blocking Step</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <pass_all_rows>Y</pass_all_rows>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>block</prefix>
+      <cache_size>5000</cache_size>
+      <compress>Y</compress>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>721</xloc>
+      <yloc>182</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

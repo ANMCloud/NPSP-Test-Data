@@ -1,13 +1,18 @@
 <transformation>
   <info>
-    <name>Delete Cases</name>
+    <name>Insert Household Accounts</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
-    <directory>&#x2f;Test Data Deployment&#x2f;Delete</directory>
+    <directory>&#x2f;Test Data Deployment</directory>
     <parameters>
+        <parameter>
+            <name>WORKING_DIR</name>
+            <default_value>&#x2f;usr&#x2f;local&#x2f;kettle&#x2f;npsp_test_data_deploy</default_value>
+            <description/>
+        </parameter>
         <parameter>
             <name>sf_pass</name>
             <default_value>Oid75UlJA18l</default_value>
@@ -75,19 +80,49 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-  <created_user>-</created_user>
-  <created_date>2015&#x2f;07&#x2f;10 09&#x3a;05&#x3a;39.555</created_date>
+  <created_user/>
+  <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.182</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;08&#x2f;11 09&#x3a;25&#x3a;55.072</modified_date>
+  <modified_date>2015&#x2f;07&#x2f;30 10&#x3a;18&#x3a;08.073</modified_date>
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>npsp_test_data.db</name>
+    <server>localhost</server>
+    <type>SQLITE</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;WORKING_DIR&#x7d;&#x2f;npsp_test_data.db</database>
+    <port>-1</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>-1</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
-  <hop> <from>Get Cases by ID</from><to>Delete Cases</to><enabled>Y</enabled> </hop>
+  <hop> <from>households</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>HH_Account Record Type</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Create Temp HH Name</to><enabled>Y</enabled> </hop>
+  <hop> <from>Create Temp HH Name</from><to>Add system_account_type</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add system_account_type</from><to>Salesforce Insert</to><enabled>Y</enabled> </hop>
+  <hop> <from>Salesforce Insert</from><to>Blocking Step</to><enabled>Y</enabled> </hop>
+  <hop> <from>Blocking Step</from><to>Update</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Delete Cases</name>
-    <type>SalesforceDelete</type>
+    <name>Add system_account_type</name>
+    <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -96,24 +131,56 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
-    <username>&#x24;&#x7b;sf_user&#x7d;</username>
-    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Case</module>
-    <DeleteField>Case ID</DeleteField>
-    <batchSize>200</batchSize>
-    <timeout>60000</timeout>
-    <useCompression>N</useCompression>
-    <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
+    <fields>
+      <field>
+        <name>system_account_type</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Household Account</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>456</xloc>
-      <yloc>46</yloc>
+      <xloc>686</xloc>
+      <yloc>173</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get Cases by ID</name>
+    <name>Create Temp HH Name</name>
+    <type>Formula</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <formula><field_name>hh_name</field_name>
+<formula_string>&#x22;Household &#x22; &#x26; &#x5b;household_id&#x5d;</formula_string>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>517</xloc>
+      <yloc>174</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>HH_Account Record Type</name>
     <type>SalesforceInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -125,8 +192,8 @@
            </partitioning>
     <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
     <username>&#x24;&#x7b;sf_user&#x7d;</username>
-    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Case</module>
-    <condition/>
+    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>RecordType</module>
+    <condition>SobjectType &#x3d; &#x27;Account&#x27; and DeveloperName &#x3d; &#x27;hh_account&#x27;</condition>
     <specifyQuery>N</specifyQuery>
     <query/>
     <include_targeturl>N</include_targeturl>
@@ -148,7 +215,7 @@
     <queryAll>N</queryAll>
     <fields>
       <field>
-        <name>Case ID</name>
+        <name>Record Type ID</name>
         <field>Id</field>
         <idlookup>Y</idlookup>
         <type>String</type>
@@ -166,8 +233,197 @@
     <timeout>60000</timeout>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>111</xloc>
-      <yloc>46</yloc>
+      <xloc>169</xloc>
+      <yloc>38</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Join Rows &#x28;cartesian product&#x29;</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <cache_size>500</cache_size>
+      <main/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue/>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>314</xloc>
+      <yloc>172</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Salesforce Insert</name>
+    <type>SalesforceInsert</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
+    <username>&#x24;&#x7b;sf_user&#x7d;</username>
+    <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Account</module>
+    <batchSize>200</batchSize>
+    <salesforceIDFieldName>account_id</salesforceIDFieldName>
+    <fields>
+      <field>
+        <name>Name</name>
+        <field>hh_name</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>BillingCountry</name>
+        <field>country</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>BillingStreet</name>
+        <field>street</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>BillingCity</name>
+        <field>city</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>BillingState</name>
+        <field>state</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>BillingPostalCode</name>
+        <field>zip</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>RecordTypeId</name>
+        <field>Record Type ID</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      <field>
+        <name>npe01__SYSTEM_AccountType__c</name>
+        <field>system_account_type</field>
+        <useExternalId>N</useExternalId>
+      </field>
+      </fields>
+    <timeout>60000</timeout>
+    <useCompression>N</useCompression>
+    <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>880</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Update</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema/>
+      <table>households</table>
+      <key>
+        <name>household_id</name>
+        <field>household_id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+        </key>
+      <value>
+        <name>sf_id</name>
+        <rename>account_id</rename>
+        </value>
+      </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1065</xloc>
+      <yloc>177</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>households</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <sql>SELECT&#xa;  household_id&#xa;, country&#xa;, street&#xa;, state&#xa;, city&#xa;, zip&#xa;, contact_id&#xa;FROM households&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>99</xloc>
+      <yloc>172</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Blocking Step</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <pass_all_rows>Y</pass_all_rows>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>block</prefix>
+      <cache_size>5000</cache_size>
+      <compress>Y</compress>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>982</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

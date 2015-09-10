@@ -1,0 +1,4 @@
+*.db
+pdi-ce-*.zip
+data-integration
+npsp*_deploy/config.properties

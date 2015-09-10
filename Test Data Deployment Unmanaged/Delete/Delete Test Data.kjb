@@ -4,7 +4,7 @@
     <extended_description/>
     <job_version/>
     <job_status>0</job_status>
-  <directory>&#x2f;Test Data Deployment&#x2f;Delete</directory>
+  <directory>&#x2f;Test Data Deployment Unmanaged&#x2f;Delete</directory>
   <created_user>-</created_user>
   <created_date>2015&#x2f;06&#x2f;22 12&#x3a;26&#x3a;50.702</created_date>
   <modified_user>-</modified_user>
@@ -66,7 +66,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Setup Variables</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -103,7 +103,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Delete Opportunities</transname>
-      <directory>&#x2f;Test Data Deployment&#x2f;Delete</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged&#x2f;Delete</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -153,7 +153,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Delete Cases</transname>
-      <directory>&#x2f;Test Data Deployment&#x2f;Delete</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged&#x2f;Delete</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -193,7 +193,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Delete Contacts</transname>
-      <directory>&#x2f;Test Data Deployment&#x2f;Delete</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged&#x2f;Delete</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -233,7 +233,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Delete Accounts</transname>
-      <directory>&#x2f;Test Data Deployment&#x2f;Delete</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged&#x2f;Delete</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -273,7 +273,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Delete Recurring Donations</transname>
-      <directory>&#x2f;Test Data Deployment&#x2f;Delete</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged&#x2f;Delete</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -313,7 +313,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Delete GAUs</transname>
-      <directory>&#x2f;Test Data Deployment&#x2f;Delete</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged&#x2f;Delete</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -353,7 +353,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Delete GAU Allocations</transname>
-      <directory>&#x2f;Test Data Deployment&#x2f;Delete</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged&#x2f;Delete</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>

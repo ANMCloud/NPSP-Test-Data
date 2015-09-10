@@ -4,7 +4,7 @@
     <extended_description/>
     <job_version/>
     <job_status>0</job_status>
-  <directory>&#x2f;Test Data Deployment</directory>
+  <directory>&#x2f;Test Data Deployment Unmanaged</directory>
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.379</created_date>
   <modified_user>-</modified_user>
@@ -66,7 +66,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Setup Variables</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -103,7 +103,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert Household Accounts</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -146,7 +146,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert Organizations</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -189,7 +189,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert Contacts</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -242,7 +242,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert Recurring Donations</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -285,7 +285,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert Org Opportunities</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -328,7 +328,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert Household Opportunities</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -371,7 +371,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert Recurring Opportunities</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -414,7 +414,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Disable Future Recurring Opportunitites</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -454,7 +454,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert OppContactRoles</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -497,7 +497,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert Addresses</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -540,7 +540,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert Relationships</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -583,7 +583,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert Payments</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -626,7 +626,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert GAUs</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -669,7 +669,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert GAU Allocations</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -712,7 +712,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert Campaign Members</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -755,7 +755,7 @@
       <trans_object_id/>
       <filename/>
       <transname>Insert Campaigns</transname>
-      <directory>&#x2f;Test Data Deployment</directory>
+      <directory>&#x2f;Test Data Deployment Unmanaged</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>

@@ -6,7 +6,7 @@
     <trans_version/>
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
-    <directory>&#x2f;Test Data Deployment&#x2f;Delete</directory>
+    <directory>&#x2f;Test Data Deployment Unmanaged&#x2f;Delete</directory>
     <parameters>
         <parameter>
             <name>sf_pass</name>

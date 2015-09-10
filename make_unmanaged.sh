@@ -9,10 +9,10 @@ for file in ../../'Test Data Deployment'/Delete/*.k*; do
     echo "Writing Delete/$filename"
     sed -e "s/npsp__//g" "$file" > "$filename"
 done
-for file in *.kjb; do
+for file in *.k*; do
     filename=`basename "$file"`.new
     echo "Writing Delete/$filename"
-    sed -e "s/x2f;Test Data Deployment/x2f;Test Data Deployment Unmanaged/g" "$file" > "$filename"
+    sed -e "s/Test Data Deployment/Test Data Deployment Unmanaged/g" "$file" > "$filename"
     mv "$filename" "$file"
 done
 cd ..
@@ -22,10 +22,10 @@ for file in ../'Test Data Deployment'/*.k*; do
     echo "Writing $filename"
     sed -e "s/npsp__//g" "$file" > "$filename"
 done
-for file in *.kjb; do
+for file in *.k*; do
     filename=`basename "$file"`.new
-    echo "Writing Delete/$filename"
-    sed -e "s/x2f;Test Data Deployment/x2f;Test Data Deployment Unmanaged/g" "$file" > "$filename"
+    echo "Writing $filename"
+    sed -e "s/Test Data Deployment/Test Data Deployment Unmanaged/g" "$file" > "$filename"
     mv "$filename" "$file"
 done
 cd ..

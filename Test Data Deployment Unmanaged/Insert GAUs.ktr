@@ -6,7 +6,7 @@
     <trans_version/>
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
-    <directory>&#x2f;Test Data Deployment</directory>
+    <directory>&#x2f;Test Data Deployment Unmanaged</directory>
     <parameters>
         <parameter>
             <name>WORKING_DIR</name>

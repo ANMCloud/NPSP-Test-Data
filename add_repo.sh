@@ -53,3 +53,5 @@ cat >> ~/.kettle/repositories.xml.new << EOF
   </repository>
 </repositories>
 EOF
+
+mv ~/.kettle/repositories.xml.new ~/.kettle/repositories.xml

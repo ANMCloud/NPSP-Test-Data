@@ -53,4 +53,8 @@ WARNING: This wipes out all data found in the org that the scripts handle deleti
 
 ## Building the 100k data set
 
-Following the steps above replacing npsp_1k with npsp_1k 
+Following the steps above replacing npsp_1k with npsp_100k 
+
+## Deploying sample data to a Developer Edition Org
+
+The 1k data set is too large to fit in the storage of a DE org.  If you want to populate a DE org with sample data, follow the steps above using the npsp_de and npsp_de_deploy folders instead of npsp_1k and npsp_1k_deploy.

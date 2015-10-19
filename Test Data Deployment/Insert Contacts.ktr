@@ -83,7 +83,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.124</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;10&#x2f;19 09&#x3a;22&#x3a;10.158</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;19 09&#x3a;48&#x3a;50.947</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -117,9 +117,10 @@
   <hop> <from>Table input</from><to>Org Only Contact&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Org Only Contact&#x3f;</from><to>Org Only</to><enabled>Y</enabled> </hop>
   <hop> <from>Org Only Contact&#x3f;</from><to>Household</to><enabled>Y</enabled> </hop>
-  <hop> <from>Household</from><to>Insert Contacts</to><enabled>Y</enabled> </hop>
   <hop> <from>Org Only</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>Insert Contacts</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>All Contacts</to><enabled>Y</enabled> </hop>
+  <hop> <from>Household</from><to>All Contacts</to><enabled>Y</enabled> </hop>
+  <hop> <from>All Contacts</from><to>Insert Contacts</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Blocking Step</name>
@@ -139,7 +140,7 @@
       <compress>Y</compress>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>691</xloc>
+      <xloc>786</xloc>
       <yloc>188</yloc>
       <draw>Y</draw>
       </GUI>
@@ -208,7 +209,7 @@
     <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>523</xloc>
+      <xloc>618</xloc>
       <yloc>188</yloc>
       <draw>Y</draw>
       </GUI>
@@ -234,8 +235,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>103</xloc>
-      <yloc>71</yloc>
+      <xloc>38</xloc>
+      <yloc>135</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -273,7 +274,7 @@
       </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>850</xloc>
+      <xloc>945</xloc>
       <yloc>188</yloc>
       <draw>Y</draw>
       </GUI>
@@ -302,8 +303,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>220</xloc>
-      <yloc>105</yloc>
+      <xloc>175</xloc>
+      <yloc>135</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -422,6 +423,25 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>474</xloc>
       <yloc>71</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>All Contacts</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>479</xloc>
+      <yloc>188</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

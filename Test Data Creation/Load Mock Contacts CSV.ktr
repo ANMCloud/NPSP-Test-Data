@@ -18,6 +18,16 @@
             <default_value>100</default_value>
             <description/>
         </parameter>
+        <parameter>
+            <name>org_only_contacts</name>
+            <default_value>100</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>single_hh_contacts</name>
+            <default_value>100</default_value>
+            <description/>
+        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -78,13 +88,13 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.024</created_date>
   <modified_user>admin</modified_user>
-  <modified_date>2015&#x2f;07&#x2f;30 11&#x3a;18&#x3a;25.057</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;19 09&#x3a;17&#x3a;23.821</modified_date>
   </info>
   <notepads>
     <notepad>
       <note>Copy address from &#xa;odd rows to even rows</note>
-      <xloc>728</xloc>
-      <yloc>71</yloc>
+      <xloc>732</xloc>
+      <yloc>229</yloc>
       <width>153</width>
       <heigth>42</heigth>
       <fontname>Lucida Grande</fontname>
@@ -104,8 +114,8 @@
     </notepad>
     <notepad>
       <note>Make the address and orgization &#xa;of the first 100 rows equal to the &#xa;address and organization of &#xa;the first row</note>
-      <xloc>723</xloc>
-      <yloc>393</yloc>
+      <xloc>63</xloc>
+      <yloc>539</yloc>
       <width>224</width>
       <heigth>74</heigth>
       <fontname>Lucida Grande</fontname>
@@ -125,8 +135,8 @@
     </notepad>
     <notepad>
       <note>Write households to the &#xa;households table in sqlite</note>
-      <xloc>730</xloc>
-      <yloc>551</yloc>
+      <xloc>58</xloc>
+      <yloc>770</yloc>
       <width>173</width>
       <heigth>42</heigth>
       <fontname>Lucida Grande</fontname>
@@ -146,11 +156,53 @@
     </notepad>
     <notepad>
       <note>Write contacts to the contacts&#xa;table in sqlite with household_id</note>
-      <xloc>656</xloc>
-      <yloc>1083</yloc>
+      <xloc>660</xloc>
+      <yloc>1241</yloc>
       <width>216</width>
       <heigth>42</heigth>
       <fontname>Lucida Grande</fontname>
+      <fontsize>13</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>10&#x25; of Contacts are in individual Households</note>
+      <xloc>411</xloc>
+      <yloc>6</yloc>
+      <width>292</width>
+      <heigth>26</heigth>
+      <fontname>.Helvetica Neue DeskInterface</fontname>
+      <fontsize>13</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>10&#x25; of Contacts are directy &#xa;connected to an Organization</note>
+      <xloc>510</xloc>
+      <yloc>76</yloc>
+      <width>192</width>
+      <heigth>42</heigth>
+      <fontname>.Helvetica Neue DeskInterface</fontname>
       <fontsize>13</fontsize>
       <fontbold>N</fontbold>
       <fontitalic>N</fontitalic>
@@ -215,7 +267,6 @@
   <hop> <from>First row&#x3f;</from><to>Row 1</to><enabled>Y</enabled> </hop>
   <hop> <from>First row&#x3f;</from><to>Rows 2-N</to><enabled>Y</enabled> </hop>
   <hop> <from>Merge first row</from><to>Overwrite with first row address and organization</to><enabled>Y</enabled> </hop>
-  <hop> <from>Rows over N</from><to>Sort by Id 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Overwrite with first row address and organization</from><to>Sort by Id 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort by Id 2</from><to>First 100 in same Household</to><enabled>Y</enabled> </hop>
   <hop> <from>Row 1</from><to>Merge first row</to><enabled>Y</enabled> </hop>
@@ -243,10 +294,22 @@
   <hop> <from>Add large_hh_count</from><to>First N rows&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort last name</from><to>Add sequence</to><enabled>Y</enabled> </hop>
   <hop> <from>Add sequence</from><to>Overwrite Id with Sequence</to><enabled>Y</enabled> </hop>
-  <hop> <from>Overwrite Id with Sequence</from><to>Odd Rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>Overwrite Id with Sequence</from><to>Even Rows</to><enabled>Y</enabled> </hop>
   <hop> <from>NPSP Test Contacts.csv</from><to>Truncate Addresses</to><enabled>Y</enabled> </hop>
-  <hop> <from>Truncate Addresses</from><to>Sort last name</to><enabled>Y</enabled> </hop>
+  <hop> <from>Truncate Addresses</from><to>Set HH Type</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set HH Type</from><to>Sort last name</to><enabled>Y</enabled> </hop>
+  <hop> <from>Overwrite Id with Sequence</from><to>Get single_hh_contacts Contacts</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get single_hh_contacts Contacts</from><to>Single HH Contacts</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get single_hh_contacts Contacts</from><to>Get org_only_contacts Contacts</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get org_only_contacts Contacts</from><to>Org Only Contacts</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get org_only_contacts Contacts</from><to>Normal Households</to><enabled>Y</enabled> </hop>
+  <hop> <from>Normal Households</from><to>Odd Rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Normal Households</from><to>Even Rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Rows over N</from><to>Drop large_hh_count</to><enabled>Y</enabled> </hop>
+  <hop> <from>Drop large_hh_count</from><to>Sort by Id 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Single HH Contacts</from><to>First 100 in same Household</to><enabled>Y</enabled> </hop>
+  <hop> <from>Org Only Contacts</from><to>Add blank household_id</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add blank household_id</from><to>Remove address fields 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Remove address fields 2</from><to>Contacts with Households</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -275,8 +338,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>549</xloc>
-      <yloc>30</yloc>
+      <xloc>552</xloc>
+      <yloc>216</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -305,8 +368,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>107</xloc>
-      <yloc>302</yloc>
+      <xloc>111</xloc>
+      <yloc>460</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -334,8 +397,8 @@
       <max_value>999999999</max_value>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>154</xloc>
-      <yloc>83</yloc>
+      <xloc>179</xloc>
+      <yloc>135</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -367,8 +430,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>654</xloc>
-      <yloc>31</yloc>
+      <xloc>661</xloc>
+      <yloc>211</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -386,8 +449,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>96</xloc>
-      <yloc>212</yloc>
+      <xloc>100</xloc>
+      <yloc>370</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -405,8 +468,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>100</xloc>
-      <yloc>735</yloc>
+      <xloc>1020</xloc>
+      <yloc>905</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -424,8 +487,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>436</xloc>
-      <yloc>140</yloc>
+      <xloc>440</xloc>
+      <yloc>298</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -443,8 +506,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>101</xloc>
-      <yloc>463</yloc>
+      <xloc>931</xloc>
+      <yloc>638</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -462,8 +525,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>336</xloc>
-      <yloc>298</yloc>
+      <xloc>340</xloc>
+      <yloc>456</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -491,8 +554,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>218</xloc>
-      <yloc>325</yloc>
+      <xloc>222</xloc>
+      <yloc>483</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -520,8 +583,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>438</xloc>
-      <yloc>301</yloc>
+      <xloc>442</xloc>
+      <yloc>459</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -551,8 +614,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>673</xloc>
-      <yloc>225</yloc>
+      <xloc>677</xloc>
+      <yloc>383</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -587,8 +650,8 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>429</xloc>
-      <yloc>735</yloc>
+      <xloc>286</xloc>
+      <yloc>810</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -615,8 +678,8 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>656</xloc>
-      <yloc>132</yloc>
+      <xloc>660</xloc>
+      <yloc>290</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -643,8 +706,8 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>305</xloc>
-      <yloc>1004</yloc>
+      <xloc>309</xloc>
+      <yloc>1162</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -842,8 +905,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>157</xloc>
-      <yloc>11</yloc>
+      <xloc>66</xloc>
+      <yloc>23</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -861,8 +924,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>454</xloc>
-      <yloc>34</yloc>
+      <xloc>448</xloc>
+      <yloc>215</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -938,11 +1001,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>hh_type</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>258</xloc>
-      <yloc>99</yloc>
+      <xloc>318</xloc>
+      <yloc>135</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1018,15 +1085,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>large_hh_count</name>
+      </field>      <field>        <name>hh_type</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>876</xloc>
-      <yloc>307</yloc>
+      <xloc>702</xloc>
+      <yloc>476</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1102,11 +1169,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>hh_type</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>456</xloc>
-      <yloc>213</yloc>
+      <xloc>460</xloc>
+      <yloc>371</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1166,11 +1237,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>hh_type</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>274</xloc>
-      <yloc>735</yloc>
+      <xloc>434</xloc>
+      <yloc>863</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1190,8 +1265,8 @@
       <remove>        <name>organization_1</name>
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>304</xloc>
-      <yloc>1098</yloc>
+      <xloc>308</xloc>
+      <yloc>1256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1209,8 +1284,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>547</xloc>
-      <yloc>290</yloc>
+      <xloc>551</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1228,8 +1303,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>523</xloc>
-      <yloc>346</yloc>
+      <xloc>527</xloc>
+      <yloc>504</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1247,8 +1322,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>336</xloc>
-      <yloc>373</yloc>
+      <xloc>340</xloc>
+      <yloc>531</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1291,8 +1366,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>470</xloc>
-      <yloc>552</yloc>
+      <xloc>474</xloc>
+      <yloc>710</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1315,8 +1390,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>500</xloc>
-      <yloc>837</yloc>
+      <xloc>531</xloc>
+      <yloc>1066</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1349,8 +1424,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>547</xloc>
-      <yloc>418</yloc>
+      <xloc>551</xloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1407,8 +1482,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>239</xloc>
-      <yloc>542</yloc>
+      <xloc>265</xloc>
+      <yloc>684</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1441,8 +1516,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>289</xloc>
-      <yloc>212</yloc>
+      <xloc>293</xloc>
+      <yloc>370</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1475,8 +1550,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>192</xloc>
-      <yloc>911</yloc>
+      <xloc>94</xloc>
+      <yloc>983</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1509,8 +1584,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>239</xloc>
-      <yloc>816</yloc>
+      <xloc>270</xloc>
+      <yloc>1045</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1567,8 +1642,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>180</xloc>
-      <yloc>615</yloc>
+      <xloc>89</xloc>
+      <yloc>636</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1625,8 +1700,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>428</xloc>
-      <yloc>627</yloc>
+      <xloc>432</xloc>
+      <yloc>785</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1660,7 +1735,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>45</xloc>
-      <yloc>144</yloc>
+      <yloc>135</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1716,8 +1791,8 @@
         <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>44</xloc>
-      <yloc>36</yloc>
+      <xloc>206</xloc>
+      <yloc>23</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1749,8 +1824,8 @@
         <case_insensitive>N</case_insensitive>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>359</xloc>
-      <yloc>552</yloc>
+      <xloc>363</xloc>
+      <yloc>710</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1774,8 +1849,8 @@
         <case_insensitive>N</case_insensitive>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>367</xloc>
-      <yloc>837</yloc>
+      <xloc>398</xloc>
+      <yloc>1066</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1812,8 +1887,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>547</xloc>
-      <yloc>1098</yloc>
+      <xloc>551</xloc>
+      <yloc>1256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1850,8 +1925,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>606</xloc>
-      <yloc>552</yloc>
+      <xloc>610</xloc>
+      <yloc>710</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1888,8 +1963,275 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>692</xloc>
-      <yloc>838</yloc>
+      <xloc>723</xloc>
+      <yloc>1067</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get single_hh_contacts Contacts</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Single HH Contacts</send_true_to>
+<send_false_to>Get org_only_contacts Contacts</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>hh_type</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>single</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>754</xloc>
+      <yloc>10</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get org_only_contacts Contacts</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Org Only Contacts</send_true_to>
+<send_false_to>Normal Households</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>hh_type</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>org_only</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>755</xloc>
+      <yloc>116</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set HH Type</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>single_hh_contacts &#x3d; str2num&#x28;getVariable&#x28;&#x27;single_hh_contacts&#x27;, 100&#x29;&#x29;&#x3b;&#xa;org_only_contacts &#x3d; str2num&#x28;getVariable&#x28;&#x27;org_only_contacts&#x27;, 100&#x29;&#x29;&#x3b;&#xa;&#xa;var hh_type &#x3d; null&#x3b;&#xa;&#xa;if &#x28;id &#x3c;&#x3d; single_hh_contacts&#x29; &#x7b;&#xa;    hh_type &#x3d; &#x27;single&#x27;&#x3b;&#xa;&#x7d; else if &#x28;id &#x3c;&#x3d; &#x28;single_hh_contacts &#x2b; org_only_contacts&#x29;&#x29; &#x7b;&#xa;    hh_type &#x3d; &#x27;org_only&#x27;&#x3b;&#xa;&#x7d;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>hh_type</name>
+        <rename>hh_type</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>302</xloc>
+      <yloc>53</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Single HH Contacts</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>931</xloc>
+      <yloc>10</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Org Only Contacts</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1047</xloc>
+      <yloc>116</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Normal Households</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>273</xloc>
+      <yloc>202</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Drop large_hh_count</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>large_hh_count</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>446</xloc>
+      <yloc>551</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add blank household_id</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>household_id</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1044</xloc>
+      <yloc>222</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Remove address fields 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>salutation</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>first_name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>last_name</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>email</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>phone</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>organization</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>job_title</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>recurring_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>donation_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>household_id</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>hh_type</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1046</xloc>
+      <yloc>390</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

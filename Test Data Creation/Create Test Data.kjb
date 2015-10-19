@@ -8,7 +8,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.344</created_date>
   <modified_user>admin</modified_user>
-  <modified_date>2015&#x2f;07&#x2f;29 16&#x3a;30&#x3a;44.949</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;19 09&#x3a;03&#x3a;01.718</modified_date>
     <parameters>
         <parameter>
             <name>WORKING_DIR</name>
@@ -209,6 +209,15 @@
             <parameter>            <name>WORKING_DIR</name>
             <stream_name/>
             <value>&#x24;&#x7b;WORKING_DIR&#x7d;</value>
+            </parameter>            <parameter>            <name>large_hh_count</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;large_hh_count&#x7d;</value>
+            </parameter>            <parameter>            <name>single_hh_contacts</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;single_hh_contacts&#x7d;</value>
+            </parameter>            <parameter>            <name>org_only_contacts</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;org_only_contacts&#x7d;</value>
             </parameter>      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>

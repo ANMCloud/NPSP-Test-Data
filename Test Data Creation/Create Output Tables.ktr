@@ -73,7 +73,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;40.706</created_date>
   <modified_user>admin</modified_user>
-  <modified_date>2015&#x2f;08&#x2f;03 11&#x3a;57&#x3a;17.068</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;19 09&#x3a;02&#x3a;59.654</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -357,7 +357,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE contacts&#xa;&#x28;&#xa;  id NUMERIC&#xa;, salutation TEXT&#xa;, first_name TEXT&#xa;, last_name TEXT&#xa;, email TEXT&#xa;, phone TEXT&#xa;, organization TEXT&#xa;, job_title TEXT&#xa;, recurring_amount NUMERIC&#xa;, donation_amount NUMERIC&#xa;, household_id NUMERIC&#xa;, organization_id NUMERIC&#xa;, sf_id TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX contacts_id ON contacts &#x28;id&#x29;&#x3b;&#xa;CREATE INDEX contacts_household_id ON contacts&#x28;household_id&#x29;&#x3b;&#xa;CREATE INDEX contacts_organization_id ON contacts&#x28;organization_id&#x29;&#x3b;&#xa;</sql>
+    <sql>CREATE TABLE contacts&#xa;&#x28;&#xa;  id NUMERIC&#xa;, salutation TEXT&#xa;, first_name TEXT&#xa;, last_name TEXT&#xa;, email TEXT&#xa;, phone TEXT&#xa;, organization TEXT&#xa;, job_title TEXT&#xa;, recurring_amount NUMERIC&#xa;, donation_amount NUMERIC&#xa;, household_id NUMERIC&#xa;, organization_id NUMERIC&#xa;, sf_id TEXT&#xa;, hh_type TEXT&#xa;&#x29;&#xa;&#x3b;&#xa;&#xa;CREATE INDEX contacts_id ON contacts &#x28;id&#x29;&#x3b;&#xa;CREATE INDEX contacts_household_id ON contacts&#x28;household_id&#x29;&#x3b;&#xa;CREATE INDEX contacts_organization_id ON contacts&#x28;organization_id&#x29;&#x3b;&#xa;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>

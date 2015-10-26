@@ -78,7 +78,7 @@
   <created_user>-</created_user>
   <created_date>2015&#x2f;07&#x2f;10 09&#x3a;05&#x3a;40.462</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;08&#x2f;03 18&#x3a;10&#x3a;37.841</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;26 17&#x3a;11&#x3a;37.573</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -100,7 +100,7 @@
     <username>&#x24;&#x7b;sf_user&#x7d;</username>
     <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Contact</module>
     <DeleteField>Contact ID</DeleteField>
-    <batchSize>100</batchSize>
+    <batchSize>10</batchSize>
     <timeout>60000</timeout>
     <useCompression>N</useCompression>
     <rollbackAllChangesOnError>N</rollbackAllChangesOnError>

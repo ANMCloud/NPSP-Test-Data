@@ -88,7 +88,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.024</created_date>
   <modified_user>admin</modified_user>
-  <modified_date>2015&#x2f;10&#x2f;19 10&#x3a;21&#x3a;52.480</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;26 12&#x3a;44&#x3a;52.812</modified_date>
   </info>
   <notepads>
     <notepad>
@@ -114,7 +114,7 @@
     </notepad>
     <notepad>
       <note>Make the address and orgization &#xa;of the first 100 rows equal to the &#xa;address and organization of &#xa;the first row</note>
-      <xloc>63</xloc>
+      <xloc>42</xloc>
       <yloc>539</yloc>
       <width>224</width>
       <heigth>74</heigth>
@@ -260,7 +260,6 @@
   <hop> <from>Merge odd rows</from><to>Overwrite with odd address</to><enabled>Y</enabled> </hop>
   <hop> <from>Overwrite with odd address</from><to>Sort by id</to><enabled>Y</enabled> </hop>
   <hop> <from>Odd Rows</from><to>Sort by id</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort by id</from><to>Contacts 2 per household</to><enabled>Y</enabled> </hop>
   <hop> <from>Large HH Contact&#x3f;</from><to>Large HH</to><enabled>Y</enabled> </hop>
   <hop> <from>Large HH Contact&#x3f;</from><to>Normal HH</to><enabled>Y</enabled> </hop>
   <hop> <from>Large HH</from><to>Large HH Primary or Member&#x3f;</to><enabled>Y</enabled> </hop>
@@ -298,7 +297,6 @@
   <hop> <from>Get single_hh_contacts Contacts</from><to>Single HH Contacts</to><enabled>Y</enabled> </hop>
   <hop> <from>Get single_hh_contacts Contacts</from><to>Get org_only_contacts Contacts</to><enabled>Y</enabled> </hop>
   <hop> <from>Get org_only_contacts Contacts</from><to>Org Only Contacts</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get org_only_contacts Contacts</from><to>Normal Households</to><enabled>Y</enabled> </hop>
   <hop> <from>Normal Households</from><to>Odd Rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Normal Households</from><to>Even Rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Single HH Contacts</from><to>First 100 in same Household</to><enabled>Y</enabled> </hop>
@@ -308,6 +306,11 @@
   <hop> <from>Overwrite with first row address and organization</from><to>Sort by Id 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Contacts 2 per household</from><to>Large HH Contact&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Normal HH</from><to>Sort by Id 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort by id 3</from><to>Normal Households</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get org_only_contacts Contacts</from><to>add tmp_hh_sequence</to><enabled>Y</enabled> </hop>
+  <hop> <from>add tmp_hh_sequence</from><to>Sort by id 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort by id</from><to>Remove tmp_hh_sequence</to><enabled>Y</enabled> </hop>
+  <hop> <from>Remove tmp_hh_sequence</from><to>Contacts 2 per household</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -382,9 +385,9 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>merge_id</field_name>
+       <calculation><field_name>merge_tmp_hh_sequence</field_name>
 <calc_type>ADD</calc_type>
-<field_a>id</field_a>
+<field_a>tmp_hh_sequence</field_a>
 <field_b>one</field_b>
 <field_c/>
 <value_type>Integer</value_type>
@@ -639,10 +642,10 @@
 <step1>Even Rows</step1>
 <step2>Calculator</step2>
     <keys_1>
-      <key>id</key>
+      <key>tmp_hh_sequence</key>
     </keys_1>
     <keys_2>
-      <key>merge_id</key>
+      <key>merge_tmp_hh_sequence</key>
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -1141,6 +1144,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>tmp_hh_sequence</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -1290,8 +1297,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>340</xloc>
-      <yloc>531</yloc>
+      <xloc>440</xloc>
+      <yloc>566</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1484,8 +1491,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>293</xloc>
-      <yloc>370</yloc>
+      <xloc>312</xloc>
+      <yloc>308</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1978,7 +1985,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>Org Only Contacts</send_true_to>
-<send_false_to>Normal Households</send_false_to>
+<send_false_to>add tmp_hh_sequence</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -2179,6 +2186,90 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1046</xloc>
       <yloc>390</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort by id 3</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>tmp_hh_sequence</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>467</xloc>
+      <yloc>155</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>add tmp_hh_sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>tmp_hh_sequence</valuename>
+      <use_database>N</use_database>
+      <connection/>
+      <schema/>
+      <seqname>SEQ_</seqname>
+      <use_counter>Y</use_counter>
+      <counter_name/>
+      <start_at>1</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>581</xloc>
+      <yloc>143</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Remove tmp_hh_sequence</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>tmp_hh_sequence</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>188</xloc>
+      <yloc>308</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

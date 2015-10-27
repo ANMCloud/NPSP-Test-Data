@@ -14,13 +14,13 @@
             <description/>
         </parameter>
         <parameter>
-            <name>hh_with_opps_count</name>
-            <default_value>50</default_value>
+            <name>opps_per_hh</name>
+            <default_value>10</default_value>
             <description/>
         </parameter>
         <parameter>
-            <name>opps_per_hh</name>
-            <default_value>10</default_value>
+            <name>single_hh_with_opps_count</name>
+            <default_value>50</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -83,7 +83,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;40.300</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;07&#x2f;29 17&#x3a;41&#x3a;58.219</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;27 14&#x3a;19&#x3a;47.817</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -93,7 +93,7 @@
     <type>SQLITE</type>
     <access>Native</access>
     <database>&#x24;&#x7b;WORKING_DIR&#x7d;&#x2f;npsp_test_data.db</database>
-    <port/>
+    <port>-1</port>
     <username/>
     <password>Encrypted </password>
     <servername/>
@@ -103,6 +103,7 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>-1</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
@@ -112,13 +113,43 @@
   </connection>
   <order>
   <hop> <from>Set name, amount, and close date</from><to>Write opportunities</to><enabled>Y</enabled> </hop>
-  <hop> <from>Reservoir Sampling</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sample All HH</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Opps per HH</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>All Contacts</from><to>Sample All HH</to><enabled>Y</enabled> </hop>
+  <hop> <from>All Contacts</from><to>Double HH&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>All Contacts</from><to>Large HH&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Double HH&#x3f;</from><to>Sample Double HH</to><enabled>Y</enabled> </hop>
+  <hop> <from>Large HH&#x3f;</from><to>Sample Large HH</to><enabled>Y</enabled> </hop>
   <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Set name, amount, and close date</to><enabled>Y</enabled> </hop>
-  <hop> <from>Generate Rows</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>All Contacts</from><to>Reservoir Sampling</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Generate Rows</name>
+    <name>All Contacts</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>npsp_test_data.db</connection>
+    <sql>SELECT&#xa;  h.household_id&#xa;, h.contact_id&#xa;, c.hh_type&#xa;, c.first_name &#x7c;&#x7c; &#x27; &#x27; &#x7c;&#x7c; c.last_name as full_name&#xa;FROM households as h, contacts as c&#xa;WHERE h.contact_id &#x3d; c.id&#xa;AND c.household_id is not null&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>73</xloc>
+      <yloc>43</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Opps per HH</name>
     <type>RowGenerator</type>
     <description/>
     <distribute>Y</distribute>
@@ -149,8 +180,8 @@
     <last_time_field>FiveSecondsAgo</last_time_field>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>327</xloc>
-      <yloc>175</yloc>
+      <xloc>482</xloc>
+      <yloc>151</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -187,7 +218,7 @@
     </step>
 
   <step>
-    <name>Reservoir Sampling</name>
+    <name>Sample All HH</name>
     <type>ReservoirSampling</type>
     <description/>
     <distribute>Y</distribute>
@@ -197,7 +228,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<reservoir_sampling><sample_size>&#x24;&#x7b;hh_with_opps_count&#x7d;</sample_size>
+<reservoir_sampling><sample_size>&#x24;&#x7b;single_hh_with_opps_count&#x7d;</sample_size>
 <seed>1</seed>
 </reservoir_sampling>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -243,8 +274,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>678</xloc>
-      <yloc>42</yloc>
+      <xloc>644</xloc>
+      <yloc>43</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -301,15 +332,15 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>870</xloc>
-      <yloc>42</yloc>
+      <xloc>836</xloc>
+      <yloc>43</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>All Contacts</name>
-    <type>TableInput</type>
+    <name>Sample Double HH</name>
+    <type>ReservoirSampling</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -318,17 +349,103 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>npsp_test_data.db</connection>
-    <sql>SELECT&#xa;  h.household_id&#xa;, h.contact_id&#xa;, c.first_name &#x7c;&#x7c; &#x27; &#x27; &#x7c;&#x7c; c.last_name as full_name&#xa;FROM households as h, contacts as c&#xa;WHERE h.contact_id &#x3d; c.id&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+<reservoir_sampling><sample_size>1</sample_size>
+<seed>1</seed>
+</reservoir_sampling>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>246</xloc>
+      <yloc>115</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sample Large HH</name>
+    <type>ReservoirSampling</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<reservoir_sampling><sample_size>1</sample_size>
+<seed>1</seed>
+</reservoir_sampling>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>247</xloc>
+      <yloc>187</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Double HH&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Sample Double HH</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>hh_type</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>double</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>73</xloc>
-      <yloc>43</yloc>
+      <xloc>131</xloc>
+      <yloc>115</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Large HH&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Sample Large HH</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>hh_type</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>large</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>hh_type</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>large_primary</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>132</xloc>
+      <yloc>186</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

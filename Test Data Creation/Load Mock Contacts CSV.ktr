@@ -88,7 +88,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.024</created_date>
   <modified_user>admin</modified_user>
-  <modified_date>2015&#x2f;10&#x2f;26 12&#x3a;44&#x3a;52.812</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;27 13&#x3a;59&#x3a;52.625</modified_date>
   </info>
   <notepads>
     <notepad>
@@ -262,7 +262,7 @@
   <hop> <from>Odd Rows</from><to>Sort by id</to><enabled>Y</enabled> </hop>
   <hop> <from>Large HH Contact&#x3f;</from><to>Large HH</to><enabled>Y</enabled> </hop>
   <hop> <from>Large HH Contact&#x3f;</from><to>Normal HH</to><enabled>Y</enabled> </hop>
-  <hop> <from>Large HH</from><to>Large HH Primary or Member&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Large HH</from><to>Large HH Primary or Member&#x3f;</to><enabled>N</enabled> </hop>
   <hop> <from>Large HH Primary or Member&#x3f;</from><to>Large Primary</to><enabled>Y</enabled> </hop>
   <hop> <from>Large HH Primary or Member&#x3f;</from><to>Large Member</to><enabled>Y</enabled> </hop>
   <hop> <from>Merge first row</from><to>Overwrite with first row address and organization</to><enabled>Y</enabled> </hop>
@@ -2017,7 +2017,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>single_hh_contacts &#x3d; str2num&#x28;getVariable&#x28;&#x27;single_hh_contacts&#x27;, 100&#x29;&#x29;&#x3b;&#xa;org_only_contacts &#x3d; str2num&#x28;getVariable&#x28;&#x27;org_only_contacts&#x27;, 100&#x29;&#x29;&#x3b;&#xa;large_hh_count &#x3d; str2num&#x28;getVariable&#x28;&#x27;large_hh_count&#x27;, 100&#x29;&#x29;&#x3b;&#xa;&#xa;var hh_type &#x3d; null&#x3b;&#xa;&#xa;if &#x28;id &#x3c;&#x3d; single_hh_contacts&#x29; &#x7b;&#xa;    hh_type &#x3d; &#x27;single&#x27;&#x3b;&#xa;&#x7d; else if &#x28;id &#x3c;&#x3d; &#x28;single_hh_contacts &#x2b; org_only_contacts&#x29;&#x29; &#x7b;&#xa;    hh_type &#x3d; &#x27;org_only&#x27;&#x3b;&#xa;&#x7d; else if &#x28;id &#x3d;&#x3d; &#x28;single_hh_contacts &#x2b; org_only_contacts &#x2b; 1&#x29;&#x29; &#x7b;&#xa;    hh_type &#x3d; &#x27;large_primary&#x27;&#x3b;&#xa;&#x7d; else if &#x28;id &#x3c;&#x3d; &#x28;single_hh_contacts &#x2b; org_only_contacts &#x2b; large_hh_count&#x29;&#x29; &#x7b;&#xa;    hh_type &#x3d; &#x27;large&#x27;&#x3b;&#xa;&#x7d;&#xa;</jsScript_script>
+        <jsScript_script>single_hh_contacts &#x3d; str2num&#x28;getVariable&#x28;&#x27;single_hh_contacts&#x27;, 100&#x29;&#x29;&#x3b;&#xa;org_only_contacts &#x3d; str2num&#x28;getVariable&#x28;&#x27;org_only_contacts&#x27;, 100&#x29;&#x29;&#x3b;&#xa;large_hh_count &#x3d; str2num&#x28;getVariable&#x28;&#x27;large_hh_count&#x27;, 100&#x29;&#x29;&#x3b;&#xa;&#xa;var hh_type &#x3d; null&#x3b;&#xa;&#xa;if &#x28;id &#x3c;&#x3d; single_hh_contacts&#x29; &#x7b;&#xa;    hh_type &#x3d; &#x27;single&#x27;&#x3b;&#xa;&#x7d; else if &#x28;id &#x3c;&#x3d; &#x28;single_hh_contacts &#x2b; org_only_contacts&#x29;&#x29; &#x7b;&#xa;    hh_type &#x3d; &#x27;org_only&#x27;&#x3b;&#xa;&#x7d; else if &#x28;id &#x3d;&#x3d; &#x28;single_hh_contacts &#x2b; org_only_contacts &#x2b; 1&#x29;&#x29; &#x7b;&#xa;    hh_type &#x3d; &#x27;large_primary&#x27;&#x3b;&#xa;&#x7d; else if &#x28;id &#x3c;&#x3d; &#x28;single_hh_contacts &#x2b; org_only_contacts &#x2b; large_hh_count&#x29;&#x29; &#x7b;&#xa;    hh_type &#x3d; &#x27;large&#x27;&#x3b;&#xa;&#x7d; else &#x7b;&#xa;    hh_type &#x3d; &#x27;double&#x27;&#x3b;&#xa;&#x7d;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>hh_type</name>
         <rename>hh_type</rename>
         <type>String</type>

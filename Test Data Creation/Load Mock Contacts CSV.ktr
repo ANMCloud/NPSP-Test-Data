@@ -20,12 +20,12 @@
         </parameter>
         <parameter>
             <name>org_only_contacts</name>
-            <default_value>100</default_value>
+            <default_value>2</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>single_hh_contacts</name>
-            <default_value>100</default_value>
+            <default_value>820</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -88,7 +88,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.024</created_date>
   <modified_user>admin</modified_user>
-  <modified_date>2015&#x2f;10&#x2f;27 15&#x3a;52&#x3a;47.313</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;27 17&#x3a;39&#x3a;29.671</modified_date>
   </info>
   <notepads>
     <notepad>

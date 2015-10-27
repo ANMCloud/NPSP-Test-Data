@@ -8,7 +8,7 @@
   <created_user/>
   <created_date>2015&#x2f;06&#x2f;19 14&#x3a;18&#x3a;41.344</created_date>
   <modified_user>admin</modified_user>
-  <modified_date>2015&#x2f;10&#x2f;27 14&#x3a;19&#x3a;58.160</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;27 17&#x3a;39&#x3a;32.072</modified_date>
     <parameters>
         <parameter>
             <name>WORKING_DIR</name>
@@ -308,9 +308,9 @@
             <parameter>            <name>WORKING_DIR</name>
             <stream_name/>
             <value>&#x24;&#x7b;WORKING_DIR&#x7d;</value>
-            </parameter>            <parameter>            <name>hh_with_opps_count</name>
+            </parameter>            <parameter>            <name>single_hh_with_opps_count</name>
             <stream_name/>
-            <value>&#x24;&#x7b;hh_with_opps_count&#x7d;</value>
+            <value>&#x24;&#x7b;single_hh_with_opps_count&#x7d;</value>
             </parameter>            <parameter>            <name>opps_per_hh</name>
             <stream_name/>
             <value>&#x24;&#x7b;opps_per_hh&#x7d;</value>

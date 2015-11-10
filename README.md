@@ -10,6 +10,10 @@ The instructions below assume you have a copy of the Nonprofit Starter Pack 3 in
     wget http://sourceforge.net/projects/pentaho/files/Data%20Integration/5.4/pdi-ce-5.4.0.1-130.zip/download
     unzip pdi-ce-5.4.0.1-130.zip
 
+## Add Kettle entry for NPSP-Test-Data repository
+
+    ./add_repo.sh "NPSP-Test-Data" `pwd`
+
 ## Generate Test Data
 
     WORKING_DIR=`pwd`/npsp_1k
@@ -29,11 +33,11 @@ The instructions below assume you have a copy of the Nonprofit Starter Pack 3 in
    
 ### For managed package installations 
     
-    ./kitchen.sh -rep="NPSP-Test-Data" -dir="Test Data Deployment" -param:WORKING_DIR=$WORKING_DIR -job="Create Test Data"
+    ./kitchen.sh -rep="NPSP-Test-Data" -dir="Test Data Deployment" -param:WORKING_DIR=$WORKING_DIR -job="Deploy Test Data"
 
 ### For unmanaged deployments
 
-    ./kitchen.sh -rep="NPSP-Test-Data" -dir="Test Data Deployment Unmanaged" -param:WORKING_DIR=$WORKING_DIR -job="Create Test Data"
+    ./kitchen.sh -rep="NPSP-Test-Data" -dir="Test Data Deployment Unmanaged" -param:WORKING_DIR=$WORKING_DIR -job="Deploy Test Data"
 
 ### Deleting the Test Data
 

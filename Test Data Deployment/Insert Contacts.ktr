@@ -160,7 +160,7 @@
     <targeturl>https&#x3a;&#x2f;&#x2f;www.salesforce.com&#x2f;services&#x2f;Soap&#x2f;u&#x2f;21.0</targeturl>
     <username>&#x24;&#x7b;sf_user&#x7d;</username>
     <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>Contact</module>
-    <batchSize>200</batchSize>
+    <batchSize>100</batchSize>
     <salesforceIDFieldName>sf_id</salesforceIDFieldName>
     <fields>
       <field>

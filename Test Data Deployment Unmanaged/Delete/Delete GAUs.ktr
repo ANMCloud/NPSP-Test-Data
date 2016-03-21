@@ -100,7 +100,7 @@
     <username>&#x24;&#x7b;sf_user&#x7d;</username>
     <password>&#x24;&#x7b;sf_pass&#x7d;</password>    <module>General_Accounting_Unit__c</module>
     <DeleteField>Id</DeleteField>
-    <batchSize>200</batchSize>
+    <batchSize>10</batchSize>
     <timeout>60000</timeout>
     <useCompression>N</useCompression>
     <rollbackAllChangesOnError>N</rollbackAllChangesOnError>
